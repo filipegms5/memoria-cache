@@ -1,0 +1,341 @@
+.tituloCache{
+	text-align: center;
+}
+
+.tabelaCache{
+	text-align: center;
+	font-size: 20px;
+}
+
+.tabelaTituloConjunto{
+	background-color: #262626;
+	color: white;
+}
+
+.iconesDeRedirect{
+  margin-top: 1%;
+  float: right;
+  z-index: 9999;
+  margin-right: 6%;
+  color: white;
+}
+
+.iconesDeRedirect2{
+  margin-top: 1%;
+  float: right;
+  z-index: 9999;
+  margin-right: 1%;
+  color: white;
+}
+
+.tv{
+  margin-top: 10px;
+  position: fixed;
+  margin-left: 10%;
+  width: 500px;
+  z-index: -1;
+}
+
+.cadastramento{
+  font-family: Snell Roundhand, cursive;
+  position: fixed;
+  height: 200px;
+  width: 22%;
+  padding:6px;
+  margin-top: 520px;
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 13%;
+  z-index: 2;
+}
+
+.trocarBloco{
+	background-color: #AFFCC1;
+}
+
+.hit{
+	text-align: left;
+}
+
+div.panel,p.flip
+{
+    width: 70px;
+    padding:5px;
+    text-align:center;
+    background:#e5eecc;
+    border:solid 1px #c3c3c3;
+    position:fixed;
+    left:10px;
+    bottom:-15px;
+    z-index:1;
+}
+div.panel
+{
+    position:fixed;
+    bottom: 29px;
+    width: 200px;
+    height: auto;
+    display:none;
+    text-align:left;
+    z-index:1;
+}
+
+.contenedor {
+    
+    display: flex;
+    width: 130%;
+    height: 45px;
+    color: black;
+    font-size: 40px;
+    line-height: 40px;
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: hidden;
+    
+}
+
+ul {
+    list-style: none;
+    padding-left: 10px;
+    animation: cambiar 7s infinite;
+
+}
+
+ul, p {
+    margin: 0;
+}
+
+@keyframes cambiar {
+    
+    0%{ margin-top: 0;}
+    20%{ margin-top: 0;}
+    
+    25% {margin-top: -40px;}
+    50% {margin-top: -40px;}
+    
+    55% {margin-top: -80px;}
+    80% {margin-top: -80px;}
+    
+    85% {margin-top: -40px;}
+    95% {margin-top: -40px;}
+    
+    100% {margin-top: 0;}
+}
+
+/* Float Shadow */
+.hvr-float-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-float-shadow:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+/* Ruri */
+
+.bgcolor-4 { background: #fff; color: #000; }
+.center{
+    text-align: center;
+}
+.input {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 1em;
+    max-width: 350px;
+    width: calc(100% - 2em);
+    vertical-align: top;
+}
+
+.input__field {
+    position: relative;
+    display: block;
+    float: right;
+    padding: 0.8em;
+    width: 60%;
+    border: none;
+    border-radius: 0;
+    background: #000;
+    color: #0000;
+    font-weight: 400;
+    font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-appearance: none; /* for box shadows to show on iOS */
+}
+
+.input__field:focus {
+    outline: none;
+}
+
+.input__label {
+    display: inline-block;
+    float: center;
+    padding: 0 1em;
+    width: 40%;
+    color: #000000;
+    font-weight: bold;
+    font-size: 70.25%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.input__label-content {
+    position: relative;
+    display: block;
+    padding: 1.6em 0;
+    width: 100%;
+}
+
+.graphic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: none;
+}
+
+.icon {
+    color: #ddd;
+    font-size: 150%;
+}
+
+a{ 
+text-decoration:none; 
+color:#000000; 
+} 
+
+.alinhaIcone{
+  float: right;
+  margin-right: 5%;
+}
+
+.direitaIcone{
+  float: right;
+  margin-right: 1%;
+}
+
+.input__field--ruri {
+    width: 100%;
+    background: transparent;
+    padding: 0.5em 0;
+    margin-bottom: 2em;
+    color: #000;
+}
+
+.input__label--ruri {
+    width: 100%;
+    position: absolute;
+    text-align: left;
+    font-size: 1em;
+    padding: 10px 0 5px;
+    pointer-events: none;
+}
+
+.input__label--ruri::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 7px;
+    background: #000000;
+    left: 0;
+    top: 100%;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transition: -webkit-transform 0.3s, background-color 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.input__label-content--ruri {
+    padding: 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transition: -webkit-transform 0.3s, color 0.3s;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.input__field--ruri:focus + .input__label--ruri::after,
+.input--filled .input__label--ruri::after {
+    background: #000000;
+    -webkit-transform: scale3d(1, 0.25, 1);
+    transform: scale3d(1, 0.25, 1);
+}
+
+.input__field--ruri:focus + .input__label--ruri .input__label-content--ruri,
+.input--filled .input__label--ruri .input__label-content--ruri {
+    color: #000000;
+    -webkit-transform: translate3d(0, 2em, 0) scale3d(0.655, 0.655, 1);
+    transform: translate3d(0, 2em, 0) scale3d(0.655, 0.655, 1);
+}
+
+.content {
+    font-size: 150%;
+    padding: 5em 0;
+    margin-top: 80px;
+}
+
+.content h2 {
+    margin: 0 0 2em;
+    opacity: 0.1;
+}
+
+.content p {
+    margin: 1em 0;
+    padding: 5em 0 0 0;
+    font-size: 0.65em;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Raleway:200,500,700,800);
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'codropsicons';
+  src:url('../fonts/codropsicons/codropsicons.eot');
+  src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+    url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+    url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}
