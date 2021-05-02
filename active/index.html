@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--
+	Active by TEMPLATE STOCK
+	templatestock.co @templatestock
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>trabalho Memoria Cache</title>
+	
+	<!-- Main CSS file -->
+	<link rel="stylesheet" href="css/style.css" />
+	
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+<body>
+
+	<!-- PRELOADER -->
+	<div id="st-preloader">
+		<div id="pre-status">
+			<div class="preload-placeholder"></div>
+		</div>
+	</div>
+	<!-- /PRELOADER -->
+
+	<!-- HEADER -->
+	<header class="st-header st-fullHeight">
+		<div class="header-overlay"></div><!-- /HEADER OVERLY -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center st-header-content">
+					<div class="logo"><a href=""><img src="images/cotemig.jpg" alt="" style="border-radius: 50%;" width="20%" height="20%"></a></div>
+					<div class="st-header-title">
+						<h2>Bem vindo ao nosso trabalho <span>AEDII x AOC</span></h2>
+						<p>Neste trabalho vamos realizar a simulação de memória cache, usando os algoritmos FIFO, LFU e LRU. Segue os nossos contatos também.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="#service" class="mouse-icon hidden-xs">
+			<div class="wheel"></div>
+		</a>
+	</header>
+	<!-- /HEADER -->
+
+	<!-- SERVICE ICONS -->
+	<section id="service" class="service-icons">		
+		<div class="container">
+			<h1 style="margin-left: 35%;"><b>Inserção de valores</b></h1>
+			<div class="row">				
+				<form>
+					<div class="mb-3">
+					  <label for="exampleInputEmail1" class="form-label">Memoria principal</label>
+					  <input type="" class="form-control" id="" aria-describedby="emailHelp">
+					  
+					</div>
+					<div class="mb-3">
+					  <label for="exampleInputPassword1" class="form-label">Tamanho do Bloco</label>
+					  <input type="" class="form-control" id="">
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Quantidade de linha</label>
+						<input type="" class="form-control" id="">
+					  </div>
+					  <div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Valor de N</label>
+						<input type="" class="form-control" id="">
+					  </div> <br>	
+					
+					<button type="" class="btn btnintegracao btn-success col-md-4">Gerar</button>
+					<button type="" class="btn btnintegracao btn-danger col-md-4">Resetar</button>
+				  </form><br><br><br><br><br><br>
+
+				  	<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%;">
+							<label>Carregar bloco</label>							
+							<input class="form-control" type="number" name="carregarBloco" id="carregarBloco" placeholder="Digite o bloco"><br>	
+							<select onclick="" id="" style="width:100px;height: 40px;display: inline;border-color: black;" class="form-control hvr-float-shadow ">
+								<option value="FIFO">FIFO</option>
+								<option value="LRU">LRU</option>
+								<option value="LFU">LFU</option>
+							</select><br><br>													
+							<div class="hit" id="ModTotal"></div>							
+							<input style="margin-left: 30%;" type="button" id="" class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar" onclick="buttonCarregaBloco()">							
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /SERVICE ICONS -->
+
+
+
+	<!-- CONTACT -->
+	<section class="contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 contact-info">
+					<h2 class="contact-title text-uppercase">Contato Rafa</h2>
+					<p class="contact-content">Segue abaixo o contato do Rafael Lourenço abaixo:</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
+					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-9129-1877</strong></p>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>								
+				<div class="col-sm-6 contact-info">
+					<h2 class="contact-title text-uppercase">Contato Gabriel</h2>
+					<p class="contact-content">Segue abaixo o contato do Gabriel Mendes Reis:</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
+					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-7345-4641</strong></p>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000317@aluno.faculdadecotemig.br</strong></p>					
+				</div>	
+				<div class="col-sm-6 contact-info">
+					<h2 class="contact-title text-uppercase">Contato Lucas Pires</h2>
+					<p class="contact-content">Segue abaixo o contato do .</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
+					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-7345-4641</strong></p>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>	
+				<div class="col-sm-6 contact-info">
+					<h2 class="contact-title text-uppercase">Contato Filipe Gomes</h2>
+					<p class="contact-content">Segue abaixo o contato do .</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
+					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-9129-1877</strong></p>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>	
+				<div class="col-sm-6 contact-info">
+					<h2 class="contact-title text-uppercase">Contato Savio</h2>
+					<p class="contact-content">Segue abaixo o contato do Savio Carvalho:</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
+					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-9129-1877</strong></p>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>				
+			</div>
+
+
+
+		</div>
+	</section>
+	<!-- /CONTACT -->
+
+	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- SOCIAL ICONS -->
+				<div class="col-sm-6 col-sm-push-6 social-icons">
+					<a href=""><i class="fa fa-facebook"></i></a>
+					<a href=""><i class="fa fa-twitter"></i></a>
+					<a href=""><i class="fa fa-google-plus"></i></a>
+					<a href=""><i class="fa fa-pinterest-p"></i></a>
+				</div>
+				<!-- /SOCIAL ICONS -->
+				<div class="col-sm-6 col-sm-pull-6 copyright">
+					<p>&copy; 2016 <a href="http://templatestock.co">Template Stock</a>. All Rights Reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /FOOTER -->
+	
+	<!-- JS -->
+	<script type="text/javascript" src="js/jquery.min.js"></script><!-- jQuery -->
+	<script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap -->
+	<script type="text/javascript" src="js/jquery.parallax.js"></script><!-- Parallax -->
+	<script type="text/javascript" src="js/smoothscroll.js"></script><!-- Smooth Scroll -->
+	<script type="text/javascript" src="js/scripts.js"></script><!-- Scripts -->
+
+</body>
+</html>
