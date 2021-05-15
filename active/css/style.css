@@ -32,6 +32,17 @@
 
 /* 2. BASIC STYLES */
 
+	.tabelaCache{
+		text-align: center;
+		font-size: 30px;
+		width: 120px;
+	}
+
+	.tabelaTituloConjunto{
+		background-color: #262626;
+		color: white;
+	}
+
 	html, body {
 		height: 100%;
 	}

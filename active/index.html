@@ -12,6 +12,7 @@
 	
 	<!-- Main CSS file -->
 	<link rel="stylesheet" href="css/style.css" />
+	<script src="js/back.js"></script> <!-- Back-End -->
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,54 +56,122 @@
 	<section id="service" class="service-icons">		
 		<div class="container">
 			<h1 style="margin-left: 35%; color: white;"><b>Inserção de valores</b></h1>
-			<div class="row ">				
+			<div class="row" id="carregamento">	
+
+					<div id="carregamento" >
+						<div class="hit" id="Hit"></div>
+						<div style="float: right;" id="valorQueSai"></div>
+						<div class="hit" id="Miss"></div>				
+						<div class="hit" id="Atencao"></div>
+						<div style="float: right;" id="valorQueEntra"></div>
+						<div class="hit" id="ModTotal"></div>
+					</div>
+					<div id="mensagem" class="col-md-2 "></div>
 				<form>
 					<div class="mb-3 ">
-					  <label for="exampleInputEmail1" class="form-label" style="color: white;">Memoria principal</label>
-					  <input type="" class="form-control" id="" aria-describedby="emailHelp">
+					  <label for="tamanhoMemoria" class="form-label" style="color: white;">Memoria principal</label>
+					  <input type="number" class="form-control" id="tamanhoMemoria" aria-describedby="emailHelp">
 					  
 					</div>
-					<div class="mb-3 ">
-					  <label for="exampleInputPassword1" class="form-label" style="color: white;">Tamanho do Bloco</label>
-					  <input type="" class="form-control" id="">
+					<div class="mb-3 " >
+					  <label for="tamanhoBloco" class="form-label" style="color: white;">Tamanho do Bloco</label>
+					  <input type="" class="form-control" id="tamanhoBloco">
 					</div>
 					<div class="mb-3 ">
 						<label for="exampleInputPassword1" class="form-label" style="color: white;">Quantidade de linha</label>
-						<input type="" class="form-control" id="">
+						<input type="number" class="form-control" id="quantidadeLinha">
 					  </div>
 					  <div class="mb-3 ">
 						<label for="exampleInputPassword1" class="form-label" style="color: white;">Valor de N</label>
-						<input type="" class="form-control" id="">
+						<input type="" class="form-control" id="valorN">
 					  </div> <br>	
 					
-					<button type="" class="btn btnintegracao btn-success col-md-4">Gerar</button>
-					<button type="" class="btn btnintegracao btn-danger col-md-4">Resetar</button>
-				  </form><br><br><br><br><br><br>
+					<button type="button" id="botaoEnvia" class="btn btnintegracao btn-success col-md-4" value="Gerar" onclick="criaTabela();">Gerar</button>
+					<button type="button" id="botaoReseta" class="btn btnintegracao btn-danger col-md-4" value="Resetar" onclick="resetar()">Resetar</button>
+				  </form><br><br><br><br>
 
 				  	<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%;">
 							<label style="color: white;">Carregar bloco</label>							
 							<input class="form-control" type="number" name="carregarBloco" id="carregarBloco" placeholder="Digite o bloco"><br>	
-							<select onclick="" id="" style="width:100px;height: 40px;display: inline;border-color: black;" class="form-control hvr-float-shadow ">
+							<select onclick="selecionouAlgoritimo()" id="campoSubstituicao" style="width:100px;height: 40px;display: inline;border-color: black;" class="form-control hvr-float-shadow ">
 								<option value="FIFO">FIFO</option>
 								<option value="LRU">LRU</option>
 								<option value="LFU">LFU</option>
-							</select><br><br>													
-							<div class="hit" id="ModTotal"></div>							
-							<input style="width: 100%;" type="button" id="" class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar" onclick="buttonCarregaBloco()">							
-					</div>
+							</select><br><br>
+
+							<div class="form-label" style="color: white;" id="ModTotal"></div>	
+							<div class="hit" id="Hit" style="color: white;">Hit: 44</div>							
+							<div class="hit" id="Miss" style="color: white;">Miss: 8</div>
+							<div class="hit" id="Atencao" style="display: none;" style="color: white;"></div>							
+							<div class="hit" id="ModTotal" style="color: white;">6%1=0</div>
+							<input id="botaoCarrega" style="width: 100%;" type="button" id="" class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar" onclick="buttonCarregaBloco()">	
+							<div class="container"><br><br><br><br>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-5">
+											<div id="mensagem" class="contenedor animated rubberBand">											
+												<div id="focar" class="col-md-7">													
+													<table class="tabelaCache table table-striped table-hover table-bordered table-condensed animated rubberBand" id="tabela" >
+
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>						
+					</div>				
 				</div>
 			</div>
 		</div>
 	</section>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	
->>>>>>> main
-=======
-	
->>>>>>> main
 
+		<script type="text/javascript">
+		
+			$(document).ready(function(){
+			$("#mover").on('click', function(event) {
+				event.preventDefault();
+				$('html, body').animate({
+					scrollTop: $("#focar").offset().top
+				}, 800, function(){
+				});
+			});
+			});
+			
+			(function() {
+						if (!String.prototype.trim) {
+							(function() {
+								var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+								String.prototype.trim = function() {
+									return this.replace(rtrim, '');
+								};
+							})();
+						}
+						
+						[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+							if( inputEl.value.trim() !== '' ) {
+								classie.add( inputEl.parentNode, 'input--filled' );
+							}
+		
+							// events:
+							inputEl.addEventListener( 'focus', onInputFocus );
+							inputEl.addEventListener( 'blur', onInputBlur );
+						} );
+		
+						function onInputFocus( ev ) {
+							classie.add( ev.target.parentNode, 'input--filled' );
+						}
+		
+						function onInputBlur( ev ) {
+							if( ev.target.value.trim() === '' ) {
+								classie.remove( ev.target.parentNode, 'input--filled' );
+							}
+						}
+					})();
+						document.getElementById('carregamentoBloco').style.display = 'none';
+						document.getElementById('imagem').style.display = 'none';
+						document.getElementById('botaoReseta').style.display = 'none';
+		</script>
 
 
 	<!-- CONTACT -->
@@ -174,6 +243,7 @@
 	<script type="text/javascript" src="js/jquery.parallax.js"></script><!-- Parallax -->
 	<script type="text/javascript" src="js/smoothscroll.js"></script><!-- Smooth Scroll -->
 	<script type="text/javascript" src="js/scripts.js"></script><!-- Scripts -->
+	
 
 </body>
 </html>
