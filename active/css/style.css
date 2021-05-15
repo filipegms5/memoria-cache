@@ -33,34 +33,40 @@
 /* 2. BASIC STYLES */
 
 	.tabelaCache{
-		text-align: center;
-		font-size: 30px;
-		
+		text-align: center;		
 	}
 
 	.tabelaTituloConjunto{
 		background-color: #96e0a3;
 		color: #fff;
+		
 	}
 
-	#customers {
+	table{
+		width: 30%;
+	}
+
+	td{
+		color: #FFF;
+	}
+	.customers {
 		font-family: Arial, Helvetica, sans-serif;
 		border-collapse: collapse;
-		width: 100%;
+		width: 10%;
 	  }
 	  
-	  #customers td, #customers th {
+	.td, #customers th {
 		border: 1px solid #ddd;
 		padding: 8px;
 	  }
 	  
-	  #customers tr:nth-child(even){background-color: #f2f2f2;}
+	.r:nth-child(even){background-color: #f2f2f2;}
 	  
-	  #customers tr:hover {background-color: #ddd;}
+	.tr:hover {background-color: #ddd;}
 	  
-	  #customers th {
-		padding-top: 12px;
-		padding-bottom: 12px;
+	.th {
+		padding-top: 200px;
+		padding-bottom: 200px;
 		text-align: left;
 		background-color: #4CAF50;
 		color: white;
@@ -72,8 +78,7 @@
 
 	body {
 		font: 16px/1.5 Lato, "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;
-		background-color: #fff;
-		color: #262626;
+		background-color: #fff;		
 		font-weight: 300;
 	}
 
