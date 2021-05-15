@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="css/style.css" /> <!-- Main CSS file -->
-	<script src="js/back.js"></script> <!-- Script -->
 	<title>trabalho Memoria Cache</title>
-</head>
+	
+	<!-- Main CSS file -->
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="js/back.js"></script> <!-- Back-End -->
+	
 
+	
+</head>
 <body>
+
 	<!-- PRELOADER -->
 	<div id="st-preloader">
 		<div id="pre-status">
 			<div class="preload-placeholder"></div>
 		</div>
 	</div>
+	<!-- /PRELOADER -->
 
 	<!-- HEADER -->
 	<header class="st-header st-fullHeight">
-		<div class="header-overlay"></div>
+		<div class="header-overlay"></div><!-- /HEADER OVERLY -->
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center st-header-content">
-					<div class="logo"><a href=""><img src="images/cotemig.jpg" alt="" style="border-radius: 50%;"
-								width="20%" height="20%"></a></div>
+					<div class="logo"><a href=""><img src="images/cotemig.jpg" alt="" style="border-radius: 50%;" width="20%" height="20%"></a></div>
 					<div class="st-header-title">
 						<h2>Bem vindo ao nosso trabalho <span>AEDII x AOC</span></h2>
-						<p>Neste trabalho vamos realizar a simulação de memória cache, usando os algoritmos FIFO, LFU e
-							LRU. Segue os nossos contatos também.</p>
+						<p>Neste trabalho vamos realizar a simulação de memória cache, usando os algoritmos FIFO, LFU e LRU. Segue os nossos contatos também.</p>
 					</div>
 				</div>
 			</div>
@@ -37,87 +40,125 @@
 			<div class="wheel"></div>
 		</a>
 	</header>
+	<!-- /HEADER -->
 
 	<!-- SERVICE ICONS -->
-	<section id="service" class="service-icons">
+	<section id="service" class="service-icons">		
 		<div class="container">
-			<h1 style="margin-left: 35%; color: white;"><b>Inserção de valores:</b></h1>
-			<div class="row" id="carregamento">
-				<div id="carregamento">
-					<div class="hit" id="Hit"></div>
-					<div style="float: right;" id="valorQueSai"></div>
-					<div class="hit" id="Miss"></div>
-					<div class="hit" id="Atencao"></div>
-					<div style="float: right;" id="valorQueEntra"></div>
-					<div class="hit" id="ModTotal"></div>
+			<h1 style="margin-left: 35%; color: white;"><b>Inserção de valores</b></h1>
+			<div class="row" id="carregamento">		
+				
 					<div id="mensagem"></div>
-				</div>
+								
 				<form>
 					<div class="mb-3 ">
-						<label for="tamanhoMemoria" class="form-label" style="color: white;">Memoria principal:</label>
-						<input type="number" class="form-control" id="tamanhoMemoria" aria-describedby="emailHelp">
-
+					  <label for="tamanhoMemoria" class="form-label" style="color: white;">Memoria principal</label>
+					  <input type="number" class="form-control" id="tamanhoMemoria" aria-describedby="emailHelp">
+					  
+					</div>
+					<div class="mb-3 " >
+					  <label for="tamanhoBloco" class="form-label" style="color: white;">Tamanho do Bloco</label>
+					  <input type="" class="form-control" id="tamanhoBloco">
 					</div>
 					<div class="mb-3 ">
-						<label for="tamanhoBloco" class="form-label" style="color: white;">Tamanho do Bloco:</label>
-						<input type="" class="form-control" id="tamanhoBloco">
-					</div>
-					<div class="mb-3 ">
-						<label for="exampleInputPassword1" class="form-label" style="color: white;">Quantidade de
-							linha(s):</label>
+						<label for="exampleInputPassword1" class="form-label" style="color: white;">Quantidade de linha</label>
 						<input type="number" class="form-control" id="quantidadeLinha">
-					</div>
-					<div class="mb-3 ">
-						<label for="exampleInputPassword1" class="form-label" style="color: white;">Valor de N:</label>
+					  </div>
+					  <div class="mb-3 ">
+						<label for="exampleInputPassword1" class="form-label" style="color: white;">Valor de N</label>
 						<input type="" class="form-control" id="valorN">
-					</div> <br>
+					  </div> <br>	
+					
+					<button type="button" id="botaoEnvia" class="btn btnintegracao btn-success col-md-4" value="Gerar" onclick="criaTabela();">Gerar</button>
+					<button type="button" id="botaoReseta" class="btn btnintegracao btn-danger col-md-4" value="Resetar" onclick="resetar()">Resetar</button>
+				  </form><br><br><br><br>
 
-					<button type="button" id="botaoEnvia" class="btn btnintegracao btn-success col-md-4" value="Gerar"
-						onclick="criaTabela();">Gerar</button>
-					<button type="button" id="botaoReseta" class="btn btnintegracao btn-danger col-md-4" value="Resetar"
-						onclick="resetar()">Resetar</button>
-				</form>
-				
-				<br><br><br><br>
+				  	<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%;">
+							<label style="color: white;">Carregar bloco</label>							
+							<input class="form-control" type="number" name="carregarBloco" id="carregarBloco" placeholder="Digite o bloco"><br>	
+							<select onclick="selecionouAlgoritimo()" id="campoSubstituicao" style="width:100px;height: 40px;display: inline;border-color: black;" class="form-control hvr-float-shadow ">
+								<option value="FIFO">FIFO</option>
+								<option value="LRU">LRU</option>
+								<option value="LFU">LFU</option>
+							</select><br><br>
 
-				<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%;">
-					<label style="color: white;">Carregar bloco</label>
-					<input class="form-control" type="number" name="carregarBloco" id="carregarBloco"
-						placeholder="Digite o bloco"><br>
-					<select onclick="selecionouAlgoritimo()" id="campoSubstituicao"
-						style="width:100px;height: 40px;display: inline;border-color: black;"
-						class="form-control hvr-float-shadow ">
-						<option value="FIFO">FIFO</option>
-						<option value="LRU">LRU</option>
-						<option value="LFU">LFU</option>
-					</select><br><br>
+							<div id="carregamento" >
+								<div class="hit" id="Hit" style="color: white;"></div>
+								<div style="float: right;" id="valorQueSai"></div>
+								<div class="hit" id="Miss" style="color: white;"></div>				
+								<div class="hit" id="Atencao"></div>
+								<div style="float: right;" id="valorQueEntra"></div>
+								<div class="hit" id="ModTotal" style="color: white;"></div>
+							</div>
+							<input id="botaoCarrega" style="width: 100%;" type="button" id="" class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar" onclick="buttonCarregaBloco()">	
+							<div class="container"><br><br><br><br>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<div id="mensagem" class="contenedor animated rubberBand">											
+												<div id="focar" class="col-md-6">													
+													<table class="tabelaCache  animated rubberBand" style="width: 90px;" id="tabela" >
 
-					<div class="form-label" style="color: white;" id="ModTotal"></div>
-					<div class="hit" id="Hit" style="color: white;">Hit: 44</div>
-					<div class="hit" id="Miss" style="color: white;">Miss: 8</div>
-					<div class="hit" id="Atencao" style="display: none;" style="color: white;"></div>
-					<div class="hit" id="ModTotal" style="color: white;">6 % 1 = 0</div>
-					<input id="botaoCarrega" style="width: 100%;" type="button" id=""
-						class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar"
-						onclick="buttonCarregaBloco()">
-					<div class="container"><br><br><br><br>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-5">
-									<div id="mensagem" class="contenedor">
-										<div id="focar" class="col-md-6">
-											<table class="tabelaCache table table-striped " style="width: 90px;" id="tabela"></table>
+													</table>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
+							</div>												
+					</div>				
 				</div>
 			</div>
 		</div>
-	</div>
 	</section>
+
+		<script type="text/javascript">
+		
+			$(document).ready(function(){
+			$("#mover").on('click', function(event) {
+				event.preventDefault();
+				$('html, body').animate({
+					scrollTop: $("#focar").offset().top
+				}, 800, function(){
+				});
+			});
+			});
+			
+			(function() {
+						if (!String.prototype.trim) {
+							(function() {
+								var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+								String.prototype.trim = function() {
+									return this.replace(rtrim, '');
+								};
+							})();
+						}
+						
+						[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+							if( inputEl.value.trim() !== '' ) {
+								classie.add( inputEl.parentNode, 'input--filled' );
+							}
+		
+							// events:
+							inputEl.addEventListener( 'focus', onInputFocus );
+							inputEl.addEventListener( 'blur', onInputBlur );
+						} );
+		
+						function onInputFocus( ev ) {
+							classie.add( ev.target.parentNode, 'input--filled' );
+						}
+		
+						function onInputBlur( ev ) {
+							if( ev.target.value.trim() === '' ) {
+								classie.remove( ev.target.parentNode, 'input--filled' );
+							}
+						}
+					})();
+						document.getElementById('carregamentoBloco').style.display = 'none';
+						document.getElementById('imagem').style.display = 'none';
+						document.getElementById('botaoReseta').style.display = 'none';
+		</script>
+
 
 	<!-- CONTACT -->
 	<section class="contact">
@@ -126,61 +167,52 @@
 				<div class="col-sm-4 contact-info">
 					<h2 class="contact-title text-uppercase">Contato Rafa</h2>
 					<p class="contact-content">Segue abaixo o contato do Rafael Lourenço abaixo:</p>
-					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong>
-					</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
 					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-9129-1877</strong></p>
-					<p class="st-email"><i class="fa fa-envelope-o"></i>
-						<strong>72000678@aluno.faculdadecotemig.br</strong></p>
-				</div>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>								
 				<div class="col-sm-4 contact-info">
 					<h2 class="contact-title text-uppercase">Contato Gabriel</h2>
 					<p class="contact-content">Segue abaixo o contato do Gabriel Mendes Reis:</p>
-					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong>
-					</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
 					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-7345-4641</strong></p>
-					<p class="st-email"><i class="fa fa-envelope-o"></i>
-						<strong>72000317@aluno.faculdadecotemig.br</strong></p>
-				</div>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000317@aluno.faculdadecotemig.br</strong></p>					
+				</div>	
 				<div class="col-sm-4 contact-info">
 					<h2 class="contact-title text-uppercase">Contato Lucas Pires</h2>
-					<p class="contact-content">Segue abaixo o contato do Lucas.</p>
-					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong>
-					</p>
+					<p class="contact-content">Segue abaixo o contato do .</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
 					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-7345-4641</strong></p>
-					<p class="st-email"><i class="fa fa-envelope-o"></i>
-						<strong>72000678@aluno.faculdadecotemig.br</strong></p>
-				</div>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>	
 			</div><br><br>
 			<div class="row">
 				<div class="col-sm-4 aling-center justify-content-center contact-info">
 					<h2 class="contact-title text-uppercase">Contato Filipe Gomes</h2>
-					<p class="contact-content">Segue abaixo o contato do Filipe.</p>
-					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong>
-					</p>
+					<p class="contact-content">Segue abaixo o contato do .</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
 					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-9129-1877</strong></p>
-					<p class="st-email"><i class="fa fa-envelope-o"></i>
-						<strong>72000678@aluno.faculdadecotemig.br</strong></p>
-				</div>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>	
 				<div class="col-sm-8 aling-center justify-content-center contact-info">
 					<h2 class="contact-title text-uppercase">Contato Savio</h2>
 					<p class="contact-content">Segue abaixo o contato do Savio Carvalho:</p>
-					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong>
-					</p>
+					<p class="st-address"><i class="fa fa-map-marker"></i> <strong>Minas Gerais,Belo Horizonte</strong></p>
 					<p class="st-phone"><i class="fa fa-mobile"></i> <strong>(31)9-9129-1877</strong></p>
-					<p class="st-email"><i class="fa fa-envelope-o"></i>
-						<strong>72000678@aluno.faculdadecotemig.br</strong></p>
-				</div>
+					<p class="st-email"><i class="fa fa-envelope-o"></i> <strong>72000678@aluno.faculdadecotemig.br</strong></p>					
+				</div>				
 			</div>
 		</div>
 		</div>
 	</section>
+	<!-- /CONTACT -->
 
 	<!-- FOOTER -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
 				<!-- SOCIAL ICONS -->
-				<div class="col-sm-6 col-sm-push-6 social-icons">
+				<div class="col-sm-6 col-sm-push-6 social-icons">					
 				</div>
 				<!-- /SOCIAL ICONS -->
 				<div class="col-sm-6 col-sm-pull-6 copyright">
@@ -189,62 +221,15 @@
 			</div>
 		</div>
 	</footer>
-
+	<!-- /FOOTER -->
+	
 	<!-- JS -->
-	<script type="text/javascript">
-
-		$(document).ready(function () {
-			$("#mover").on('click', function (event) {
-				event.preventDefault();
-				$('html, body').animate({
-					scrollTop: $("#focar").offset().top
-				}, 800, function () {
-				});
-			});
-		});
-
-		(function () {
-			if (!String.prototype.trim) {
-				(function () {
-					var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-					String.prototype.trim = function () {
-						return this.replace(rtrim, '');
-					};
-				})();
-			}
-
-			[].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
-				if (inputEl.value.trim() !== '') {
-					classie.add(inputEl.parentNode, 'input--filled');
-				}
-
-				// events:
-				inputEl.addEventListener('focus', onInputFocus);
-				inputEl.addEventListener('blur', onInputBlur);
-			});
-
-			function onInputFocus(ev) {
-				classie.add(ev.target.parentNode, 'input--filled');
-			}
-
-			function onInputBlur(ev) {
-				if (ev.target.value.trim() === '') {
-					classie.remove(ev.target.parentNode, 'input--filled');
-				}
-			}
-		})();
-		document.getElementById('carregamentoBloco').style.display = 'none';
-		document.getElementById('imagem').style.display = 'none';
-		document.getElementById('botaoReseta').style.display = 'none';
-	</script>
-
 	<script type="text/javascript" src="js/jquery.min.js"></script><!-- jQuery -->
 	<script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap -->
 	<script type="text/javascript" src="js/jquery.parallax.js"></script><!-- Parallax -->
 	<script type="text/javascript" src="js/smoothscroll.js"></script><!-- Smooth Scroll -->
 	<script type="text/javascript" src="js/scripts.js"></script><!-- Scripts -->
-
+	
 
 </body>
-
 </html>
