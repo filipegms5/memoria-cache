@@ -41,7 +41,7 @@
 	<!-- SERVICE ICONS -->
 	<section id="service" class="service-icons">
 		<div class="container">
-			<h1 style="margin-left: 35%; color: white;"><b>Inserção de valores</b></h1>
+			<h1 style="margin-left: 35%; color: white;"><b>Inserção de valores:</b></h1>
 			<div class="row" id="carregamento">
 				<div id="carregamento">
 					<div class="hit" id="Hit"></div>
@@ -54,21 +54,21 @@
 				</div>
 				<form>
 					<div class="mb-3 ">
-						<label for="tamanhoMemoria" class="form-label" style="color: white;">Memoria principal</label>
+						<label for="tamanhoMemoria" class="form-label" style="color: white;">Memoria principal:</label>
 						<input type="number" class="form-control" id="tamanhoMemoria" aria-describedby="emailHelp">
 
 					</div>
 					<div class="mb-3 ">
-						<label for="tamanhoBloco" class="form-label" style="color: white;">Tamanho do Bloco</label>
+						<label for="tamanhoBloco" class="form-label" style="color: white;">Tamanho do Bloco:</label>
 						<input type="" class="form-control" id="tamanhoBloco">
 					</div>
 					<div class="mb-3 ">
 						<label for="exampleInputPassword1" class="form-label" style="color: white;">Quantidade de
-							linha</label>
+							linha(s):</label>
 						<input type="number" class="form-control" id="quantidadeLinha">
 					</div>
 					<div class="mb-3 ">
-						<label for="exampleInputPassword1" class="form-label" style="color: white;">Valor de N</label>
+						<label for="exampleInputPassword1" class="form-label" style="color: white;">Valor de N:</label>
 						<input type="" class="form-control" id="valorN">
 					</div> <br>
 
@@ -76,7 +76,9 @@
 						onclick="criaTabela();">Gerar</button>
 					<button type="button" id="botaoReseta" class="btn btnintegracao btn-danger col-md-4" value="Resetar"
 						onclick="resetar()">Resetar</button>
-				</form><br><br><br><br>
+				</form>
+				
+				<br><br><br><br>
 
 				<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%;">
 					<label style="color: white;">Carregar bloco</label>
@@ -94,7 +96,7 @@
 					<div class="hit" id="Hit" style="color: white;">Hit: 44</div>
 					<div class="hit" id="Miss" style="color: white;">Miss: 8</div>
 					<div class="hit" id="Atencao" style="display: none;" style="color: white;"></div>
-					<div class="hit" id="ModTotal" style="color: white;">6%1=0</div>
+					<div class="hit" id="ModTotal" style="color: white;">6 % 1 = 0</div>
 					<input id="botaoCarrega" style="width: 100%;" type="button" id=""
 						class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar"
 						onclick="buttonCarregaBloco()">
@@ -102,12 +104,9 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-5">
-									<div id="mensagem" class="contenedor animated rubberBand">
+									<div id="mensagem" class="contenedor">
 										<div id="focar" class="col-md-6">
-											<table class="tabelaCache table table-striped  animated rubberBand"
-												style="width: 90px;" id="tabela">
-
-											</table>
+											<table class="tabelaCache table table-striped " style="width: 90px;" id="tabela"></table>
 										</div>
 									</div>
 								</div>
@@ -117,7 +116,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 	</section>
 
 	<!-- CONTACT -->
@@ -238,7 +237,7 @@
 		document.getElementById('imagem').style.display = 'none';
 		document.getElementById('botaoReseta').style.display = 'none';
 	</script>
-	
+
 	<script type="text/javascript" src="js/jquery.min.js"></script><!-- jQuery -->
 	<script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap -->
 	<script type="text/javascript" src="js/jquery.parallax.js"></script><!-- Parallax -->
