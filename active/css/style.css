@@ -1,34 +1,9 @@
-/*
-	Active by TEMPLATE STOCK
-	templatestock.co @templatestock
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
-
-
-/* TABLE OF CONTENTS
-
-	1. Import section
-	2. Basic styles
-	3. Header
-	4. Service Icons
-	5. Subscribe
-	6. Contact
-	7. Footer
-	8. Responsive
-
-*/
-
-
-
 /* 1. IMPORT SECTION */
 
 	@import url("bootstrap.min.css");
 	@import url("font-awesome.min.css");
 	@import url("http://fonts.googleapis.com/css?family=Lato:300,700,700italic&subset=latin,latin-ext");
 	@import url("http://fonts.googleapis.com/css?family=Raleway:300,700&subset=latin,latin-ext");
-
-
-
 
 /* 2. BASIC STYLES */
 
@@ -38,26 +13,19 @@
 
 	.tabelaTituloConjunto{
 		background-color: #96e0a3;
-		color: #fff;
-		
+		color: #2F3E46;
 	}
 
 	table{
-		width: 30%;
+		width: 100%;
+		border: 1px solid white;
 	}
-
-	td{
-		color: #FFF;
-	}
-	.customers {
-		font-family: Arial, Helvetica, sans-serif;
-		border-collapse: collapse;
-		width: 10%;
-	  }
 	  
-	.td, #customers th {
+	td, th {
+		color: white;
 		border: 1px solid #ddd;
 		padding: 8px;
+		border: 1px solid white;
 	  }
 	  
 	.r:nth-child(even){background-color: #f2f2f2;}
@@ -181,9 +149,6 @@
 		color: #68c3a3;
 	}
 
-	.st-header-title p{
-		
-	}
 
 	.mouse-icon {
 		position: absolute;
@@ -377,7 +342,7 @@
 /* 6. CONTACT */
 
 	.contact{
-		padding-top: 120px;
+		padding-top: 50px;
 		padding-bottom: 120px;
 	}
 
