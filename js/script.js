@@ -64,7 +64,6 @@ document.getElementById('carregamentoBloco').setAttribute('disabled', 'disabled'
 document.getElementById("carregarBloco").setAttribute('disabled', 'disabled');
 document.getElementById("botaoCarrega").setAttribute('disabled', 'disabled');
 document.getElementById('botaoReseta').style.display = 'inline';
-document.getElementById('imagem').style.display = 'block';
 }
 
 /* Após selecionar algoritimo, ativar e desativar campos de interação com usuario */
@@ -84,11 +83,6 @@ function mostraValorQueSai(valorIni, valorFim){
 	sai.style.color = "red";
 	entra.innerHTML = "Bloco que entra: " + valorFim;
 	entra.style.color = "green";
-}
-
-/* Resetar página */
-function resetar(){
-	location.href="index.html";
 }
 
 /* Pega a data atual HH:MM:SS */
@@ -461,4 +455,3 @@ function desenfileirar(array){
 	array.shift();
 }
 /* Fim Algortimo de FILA */
-
