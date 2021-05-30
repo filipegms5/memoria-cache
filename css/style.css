@@ -1,4 +1,11 @@
-
+/* CORES
+		--cinza: #cad2c5;
+		--verde-claro: #84A98C;
+		--verde-escuro: #52796F;
+		--verde-muito-escuro: #354F52;
+		--cinza-escuro: #2F3E46;
+*/
+	
 	@import url("bootstrap.min.css");
 	@import url("font-awesome.min.css");
 	@import url("http://fonts.googleapis.com/css?family=Lato:300,700,700italic&subset=latin,latin-ext");
@@ -9,8 +16,8 @@
 	}
 
 	.tabelaTituloConjunto{
-		background-color: #96e0a3;
-		color: #2F3E46;
+		background-color: #52796F;
+		color: #cad2c5;
 	}
 
 	table{
@@ -19,15 +26,12 @@
 	}
 	  
 	td, th {
-		color: white;
-		border: 1px solid #ddd;
+		color: #cad2c5;
+		border: 1px solid #cad2c5;
 		padding: 8px;
-		border: 1px solid white;
+		border: 1px solid #cad2c5;
 	  }
-	  
-	.r:nth-child(even){background-color: #f2f2f2;}
-	  
-	.tr:hover {background-color: #ddd;}
+	
 	  
 	.th {
 		padding-top: 200px;
@@ -63,6 +67,11 @@
 	.btnintegracao{
 		margin-left: 10%;
 		
+	}
+
+	button{
+		border-radius: 8px;
+		border: none;
 	}
 
 	a:hover {
@@ -126,7 +135,7 @@
 	}
 
 	.st-header-title{
-		color: #fff;
+		color: #cad2c5;
 		padding-top: 40px;
 	}
 
@@ -137,7 +146,7 @@
 
 	.st-header-title h2 span{
 		font-weight: 700;
-		color: #68c3a3;
+		color: #84A98C;
 	}
 
 
@@ -197,7 +206,7 @@
 		100% { top:25px; opacity: 0;}
 	}
 
-	.service-icons{
+	.body-cache{
 		padding-top: 20px;
 		padding-bottom: 150px;
 		background-color: #2F3E46;

@@ -1,7 +1,3 @@
-/* FunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunções  */
-/* FunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunções  */
-/* FunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunçõesFunções  */
-
 var arrayGlobal = [];
 var arrayFila = [];
 var arrayLRU = [];
@@ -63,7 +59,6 @@ function ativarCarregamento() {
 	document.getElementById('carregamentoBloco').setAttribute('disabled', 'disabled');
 	document.getElementById("carregarBloco").setAttribute('disabled', 'disabled');
 	document.getElementById("botaoCarrega").setAttribute('disabled', 'disabled');
-	document.getElementById('botaoReseta').style.display = 'inline';
 }
 
 /* Após selecionar algoritimo, ativar e desativar campos de interação com usuario */

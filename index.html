@@ -38,66 +38,65 @@
 		</a>
 	</header>
 
-	<!-- SERVICE ICONS -->
-	<section id="body" class="service-icons">
+	<section id="body" class="body-cache">
 		<div class="container">
-			<h1 style="margin-left: 35%; color: white;"><b>Inserção de valores</b></h1>
+			<h1 style="margin-left: 35%; color: #cad2c5;"><b>Inserção de valores</b></h1><br><br>
 			<div class="row" id="carregamento">
 				<div id="mensagem"></div>
-				<form>
+				<form class="col-md-6" style="margin-left: 35%;">
 					<div class="mb-3 ">
-						<label for="tamanhoMemoria" class="form-label" style="color: white;">Memória principal</label>
-						<input class="form-control" id="tamanhoMemoria">
+						<label for="tamanhoMemoria" class="form-label" style="color: #cad2c5;">Memória principal:</label>
+						<input class="form-control" id="tamanhoMemoria" style="width: 50%;">
 					</div>
 					<div class="mb-3 ">
-						<label for="tamanhoBloco" class="form-label" style="color: white;">Tamanho do Bloco</label>
-						<input class="form-control" id="tamanhoBloco">
+						<label for="tamanhoBloco" class="form-label" style="color: #cad2c5;">Tamanho do Bloco:</label>
+						<input class="form-control" id="tamanhoBloco" style="width: 50%;">
 					</div>
 					<div class="mb-3 ">
-						<label for="exampleInputPassword1" class="form-label" style="color: white;">Quantidade de
-							linha</label>
-						<input class="form-control" id="quantidadeLinha">
+						<label for="exampleInputPassword1" class="form-label" style="color: #cad2c5;">Quantidade de
+							linha:</label>
+						<input class="form-control" id="quantidadeLinha" style="width: 50%;">
 					</div>
 					<div class="mb-3 ">
-						<label for="exampleInputPassword1" class="form-label" style="color: white;">Valor de N</label>
-						<input class="form-control" id="valorN">
+						<label for="exampleInputPassword1" class="form-label" style="color: #cad2c5; width: 50%;">Valor de N:</label>
+						<input class="form-control" id="valorN" style="width: 50%;">
 					</div> <br>
-					<button type="button" id="botaoEnvia" class="btn btnintegracao btn-success col-md-4" value="Gerar"
+					<button type="button" id="botaoEnvia" style="background-color: #52796F; color: #cad2c5;  width: 50%;" 
 						onclick="criaTabela();">GERAR TABELA</button>
 				</form>
 
 				<br><br><br><br>
 
-				<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%;">
-					<label style="color: white;">Carregar bloco: </label>
-					<input class="form-control" name="carregarBloco" id="carregarBloco"
-						placeholder="Digite o bloco"><br>
+				<div id="carregamentoBloco" class="col-md-6" style="display: block; margin-left: 20%; margin-top: 5%;">
+						<label style="color: #cad2c5;">Selecione um Algoritmo: </label><br>
 					<select onclick="selecionouAlgoritimo()" id="campoSubstituicao"
-						style="width:100px;height: 40px;display: inline;border-color: black;"
+						style="width:50%; display: inline;border-color: black;"
 						class="form-control hvr-float-shadow ">
 						<option value="FIFO">FIFO</option>
 						<option value="LRU">LRU</option>
 						<option value="LFU">LFU</option>
-					</select>
+					</select><br><br>
+					<label style="color: #cad2c5;">Carregar bloco: </label>
+					<input class="form-control" name="carregarBloco" id="carregarBloco" style="width: 50%;"><br>
 
-					<br><br>
+					<br>
 
 					<div id="carregamento">
-						<div class="hit" id="Hit" style="color: white;"></div>
+						<div class="hit" id="Hit" style="color: #cad2c5;"></div>
 						<div style="float: right;" id="valorQueSai"></div>
-						<div class="hit" id="Miss" style="color: white;"></div>
+						<div class="hit" id="Miss" style="color: #cad2c5;"></div>
 						<div class="hit" id="Atencao"></div>
 						<div style="float: right;" id="valorQueEntra"></div>
-						<div class="hit" id="ModTotal" style="color: white;"></div>
+						<div class="hit" id="ModTotal" style="color: #cad2c5;"></div>
 					</div>
 
-					<input id="botaoCarrega" style="width: 100%;" type="button" id=""
+					<input id="botaoCarrega" style="width: 100%;" type="button" 
 						class="btn btn-success hvr-float-shadow col-md-6" min="0" value="Carregar Bloco"
 						onclick="buttonCarregaBloco()">
 
 					<br><br>
 
-					<input id="botaoCarrega" style="width: 100%;" type="button" id=""
+					<input id="botaoCarrega" style="width: 100%;" type="button" 
 						class="btn btn-danger hvr-float-shadow col-md-6" min="0" value="Reiniciar Processo"
 						onclick="location.reload();">
 
@@ -105,7 +104,7 @@
 						<br><br><br><br>
 						<div class="form-group">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-6" style="margin-left: 15%">
 									<div id="mensagem" class="contenedor animated rubberBand">
 										<div id="focar" class="col-md-6">
 											<table class="tabelaCache customers" id="tabela"></table>
@@ -226,7 +225,6 @@
 		})();
 
 		document.getElementById('carregamentoBloco').style.display = 'none';
-		document.getElementById('botaoReseta').style.display = 'none';
 
 	</script>
 </body>
