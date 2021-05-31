@@ -21,26 +21,6 @@
 	}
 
 	table{
-<<<<<<< HEAD:active/css/style.css
-		width: 80%;
-	}
-
-	td{
-		color: #FFF;
-	}
-	.customers {
-		font-family: Arial, Helvetica, sans-serif;
-		font-size: 30px;
-		border-collapse: collapse;
-		margin-left: 55%;
-		width: 100%;
-		margin-right: 55%;
-	  }
-	  
-	.td, #customers th {
-		border-radius: 1px solid #ddd;
-		padding: 50px;
-=======
 		width: 100%;
 		border: 1px solid white;
 	}
@@ -50,7 +30,6 @@
 		border: 1px solid #cad2c5;
 		padding: 8px;
 		border: 1px solid #cad2c5;
->>>>>>> main:css/style.css
 	  }
 	
 	  
