@@ -44,7 +44,7 @@ function criaAttHit() {
 /* Função para criar a mensagem de miss */
 function criaAttMiss() {
 	var criar = document.getElementById("Miss");
-	criar.innerHTML = "Miss: " + miss;
+	criar.innerHTML = "Miss: " + miss++;
 }
 
 /* Função para criar a mensagem de mod */
@@ -216,6 +216,7 @@ function redirecionaBloco(bloco) {
 
 /* Função para carregamento de bloco */
 function buttonCarregaBloco() {
+	criaAttMiss();
 	/* Cria as variaveis principais */
 	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
 	var historico = document.getElementById("historico");
