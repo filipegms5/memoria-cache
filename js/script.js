@@ -7,6 +7,11 @@ var arrayCountLFU = [];
 var hit = 0;
 var miss = 0;
 
+//Função (ou funções) ao carregar a página
+window.onload = function() {
+	document.getElementById('processo').style.display = 'none';
+  };
+
 /* Função para habilitar e desabilitar campos */
 function troca(op) {
 	if (op == 'on') { // Desabilita os campos após clique
@@ -16,6 +21,7 @@ function troca(op) {
 		document.getElementById("valorN").removeAttribute('disabled'); // Habilitar
 		document.getElementById("botaoEnvia").removeAttribute('disabled'); // Habilitar
 	}
+
 	else { // Habilita os campos após clique
 		document.getElementById("tamanhoMemoria").setAttribute('disabled', 'disabled'); // Desabilitar
 		document.getElementById("tamanhoBloco").setAttribute('disabled', 'disabled'); // Desabilitar
@@ -55,8 +61,8 @@ function criaAttMod(bloco, mod) {
 
 /* Função para ativar os campos do carregamento de bloco */
 function ativarCarregamento() {
-	document.getElementById('carregamentoBloco').style.display = 'block';
-	document.getElementById('carregamentoBloco').setAttribute('disabled', 'disabled');
+	document.getElementById('processo').style.display = 'block';
+	document.getElementById('processo').setAttribute('disabled', 'disabled');
 	document.getElementById("carregarBloco").setAttribute('disabled', 'disabled');
 	document.getElementById("botaoCarrega").setAttribute('disabled', 'disabled');
 }

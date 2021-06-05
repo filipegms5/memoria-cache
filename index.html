@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-
+	
 	<meta charset="UTF-8">
 	<title>Trabalho Memória Cache</title>
 	<link rel="stylesheet" href="css/style.css" /><!-- CSS -->
@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script><!-- jQuery -->
 	<script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap -->
 	<script type="text/javascript" src="js/scripts.js"></script><!-- Scripts -->
+
 </head>
 
 <body>
@@ -33,6 +34,7 @@
 				</div>
 			</div>
 		</div>
+
 		<a href="#body" class="mouse-icon hidden-xs">
 			<div class="wheel"></div>
 		</a>
@@ -43,7 +45,7 @@
 			<h1 style="margin-left: 35%;" class="grey-text"><b>Inserção de valores</b></h1><br><br>
 			<div class="row" id="carregamento">
 				<div id="mensagem"></div>
-				<form class="col-md-12 centralize" style="">
+				<form class="col-md-12 centralize">
 					<div class="mb-3 centralize">
 						<label for="tamanhoMemoria" class="form-label grey-text" >Memória principal:</label>
 						<input class="form-control" id="tamanhoMemoria" style="width: 50%;">
@@ -67,7 +69,7 @@
 
 				<br><br><br><br>
 
-				<div id="carregamentoBloco" class="col-md-12 centralize">
+				<div id="processo" class="col-md-12 centralize">
 						<label class="grey-text">Selecione um Algoritmo: </label><br>
 					<select onclick="selecionouAlgoritimo()" id="campoSubstituicao"
 						style="width:25%; display: inline;border-color: black;"
@@ -121,6 +123,7 @@
 		</div>
 		</div>
 	</section>
+
 	<section class="contact">
 		<div class="container">
 			<h1 style="margin-left: 35%; color: 2F3E46;"><b>INTEGRANTES:</b></h1>
@@ -136,6 +139,7 @@
 						<strong>72000678@aluno.faculdadecotemig.br</strong>
 					</p>
 				</div>
+
 				<div class="col-sm-4 contact-info">
 					<h2 class="contact-title text-uppercase">Contato Gabriel</h2>
 					<p class="contact-content">Segue abaixo o contato do Gabriel Mendes Reis:</p>
@@ -146,6 +150,7 @@
 						<strong>72000317@aluno.faculdadecotemig.br</strong>
 					</p>
 				</div>
+
 				<div class="col-sm-4 contact-info">
 					<h2 class="contact-title text-uppercase">Contato Lucas Pires</h2>
 					<p class="contact-content">Segue abaixo o contato do Lucas.</p>
@@ -157,6 +162,7 @@
 					</p>
 				</div>
 			</div><br><br>
+
 			<div class="row">
 				<div class="col-sm-4 aling-center justify-content-center contact-info">
 					<h2 class="contact-title text-uppercase">Contato Filipe Gomes</h2>
@@ -182,54 +188,5 @@
 		</div>
 		</div>
 	</section>
-
-
-	<script type="text/javascript">
-	//remove this
-		$(document).ready(function () {
-			$("#mover").on('click', function (event) {
-				event.preventDefault();
-				$('html, body').animate({
-					scrollTop: $("#focar").offset().top
-				}, 800, function () {
-				});
-			});
-		});
-
-		(function () {
-			if (!String.prototype.trim) {
-				(function () {
-					var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-					String.prototype.trim = function () {
-						return this.replace(rtrim, '');
-					};
-				})();
-			}
-
-			[].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
-				if (inputEl.value.trim() !== '') {
-					classie.add(inputEl.parentNode, 'input--filled');
-				}
-
-				// events:
-				inputEl.addEventListener('focus', onInputFocus);
-				inputEl.addEventListener('blur', onInputBlur);
-			});
-
-			function onInputFocus(ev) {
-				classie.add(ev.target.parentNode, 'input--filled');
-			}
-
-			function onInputBlur(ev) {
-				if (ev.target.value.trim() === '') {
-					classie.remove(ev.target.parentNode, 'input--filled');
-				}
-			}
-		})();
-
-		document.getElementById('carregamentoBloco').style.display = 'none';
-
-	</script>
 </body>
-
 </html>
