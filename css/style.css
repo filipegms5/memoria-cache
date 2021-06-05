@@ -251,6 +251,11 @@
 		outline: none;
 	}
 
+	.btn-color{
+		background-color: #52796F!important;
+		color: #cad2c5;
+	}
+
 	@media (max-width: 767px) {
 
 		.st-header{
@@ -287,4 +292,6 @@
 		.copyright{
 			text-align: center;
 		}
+
 	}
+	
