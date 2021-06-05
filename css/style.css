@@ -83,6 +83,11 @@
 		border: 0;
 		text-decoration: none;
 	}
+	#carregamentoBloco{
+		margin-top: 5%; 
+		text-align: center;
+		display: block;
+	}
 
 	#st-preloader {
 		background: #FFF;
@@ -254,6 +259,18 @@
 	.btn-color{
 		background-color: #52796F!important;
 		color: #cad2c5;
+	}
+
+	.btn-loading{
+		width: 100%;
+	}
+
+	.centralize{
+		text-align: center;
+	}
+	.centralize > *{
+		width: 50%;
+  		margin: 0 auto!important;
 	}
 
 	@media (max-width: 767px) {
