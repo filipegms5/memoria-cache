@@ -198,8 +198,6 @@ function buttonCarregaBloco() {
 		/* Executa funções de prevenção como - Vazio e Existe */
 		var verificaVazio = isEmpty(localMemoriaCache);
 		var verificaExiste = existe(blocoDigitado, localMemoriaCache);
-		var linhaDeEntradaDoBloco = localMemoriaCache + verificaVazio;
-		var condicao = localMemoriaCache + valorDeN();
 		/* Se o bloco nao existir executa */
 		if (!verificaExiste) {
 			/* Se o conjunto nao estiver cheio executa */
