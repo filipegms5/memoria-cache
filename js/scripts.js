@@ -9,7 +9,6 @@
         });
     }());
 
-
     (function () {
         $('a[href*=#]').bind("click", function (e) {
             var anchor = $(this);
@@ -27,6 +26,5 @@
         $(window).resize(function () {
             $(".st-fullHeight").height($(window).height());
         });
-
     }());
 });

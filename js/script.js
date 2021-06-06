@@ -50,7 +50,7 @@ function criaAttHit() {
 /* Função para criar a mensagem de miss */
 function criaAttMiss() {
 	var criar = document.getElementById("Miss");
-	criar.innerHTML = "Miss: " + miss++;
+	criar.innerHTML = "Miss: " + miss;
 }
 
 /* Função para criar a mensagem de mod */
@@ -148,7 +148,7 @@ function criaTabela() {
 			if (j % valorN == 0) {
 				tdata.innerHTML = "Conjunto " + m++;
 				tdata.colSpan = 2;
-				tdata.classList.add("tabelaTituloConjunto");
+				tdata.classList.add("tableTitle");
 				trow.appendChild(tdata).colSpan = 2;
 				tbody.appendChild(trow);
 			}

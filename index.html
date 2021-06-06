@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-	
+
 	<meta charset="UTF-8">
 	<title>Trabalho Memória Cache</title>
 	<link rel="stylesheet" href="css/style.css" /><!-- CSS -->
@@ -47,7 +47,7 @@
 				<div id="mensagem"></div>
 				<form class="col-md-12 centralize">
 					<div class="mb-3 centralize">
-						<label for="tamanhoMemoria" class="form-label grey-text" >Memória principal:</label>
+						<label for="tamanhoMemoria" class="form-label grey-text">Memória principal:</label>
 						<input class="form-control" id="tamanhoMemoria" style="width: 50%;">
 					</div>
 					<div class="mb-3 centralize">
@@ -60,28 +60,25 @@
 						<input class="form-control" id="quantidadeLinha" style="width: 50%;">
 					</div>
 					<div class="mb-3 centralize">
-						<label for="exampleInputPassword1" class="form-label grey-text" style="width: 50%;">Valor de N:</label>
+						<label for="exampleInputPassword1" class="form-label grey-text" style="width: 50%;">Valor de
+							N:</label>
 						<input class="form-control" id="valorN" style="width: 50%;">
 					</div> <br>
-					<button type="button" id="botaoEnvia" class="btn-color" style="width: 50%;" 
+					<button type="button" id="botaoEnvia" class="btn-color" style="width: 50%;"
 						onclick="criaTabela();">GERAR TABELA</button>
 				</form>
 
-				<br><br><br><br>
-
 				<div id="processo" class="col-md-12 centralize">
-						<label class="grey-text">Selecione um Algoritmo: </label><br>
+					<br><br>
+					<label class="grey-text">Selecione um Algoritmo: </label><br>
 					<select onclick="selecionouAlgoritimo()" id="campoSubstituicao"
-						style="width:25%; display: inline;border-color: black;"
-						class="form-control hvr-float-shadow ">
+						style="width:25%; display: inline;border-color: black;" class="form-control hvr-float-shadow ">
 						<option value="FIFO">FIFO</option>
 						<option value="LRU">LRU</option>
 						<option value="LFU">LFU</option>
 					</select><br><br>
-					<label class="grey-text" >Carregar bloco: </label>
-					<input class="form-control" name="carregarBloco" id="carregarBloco" style="width: 25%;"><br>
-
-					<br>
+					<label class="grey-text">Carregar bloco: </label>
+					<input class="form-control" name="carregarBloco" id="carregarBloco" style="width: 25%;"><br><br>
 
 					<div id="carregamento">
 						<div class="hit grey-text" id="Hit"></div>
@@ -92,35 +89,29 @@
 						<div class="hit" id="ModTotal" style="color: white;"></div>
 					</div> <br><br>
 					<div>
-						<input id="botaoCarrega" type="button" 
+						<input id="botaoCarrega" type="button"
 							class="btn btn-color btn-loading hvr-float-shadow col-md-3" min="0" value="Carregar Bloco"
 							onclick="buttonCarregaBloco()">
 					</div>
 
 					<br><br>
+
 					<div>
-						<input id="botaoCarrega" type="button" 
-							class="btn btn-color btn-loading hvr-float-shadow col-md-3" min="0" value="Reiniciar Processo"
-							onclick="location.reload();">
+						<input id="botaoCarrega" type="button"
+							class="btn btn-color btn-loading hvr-float-shadow col-md-3" min="0"
+							value="Reiniciar Processo" onclick="location.reload();">
 					</div>
 
-					<div class="container">
-						<br><br><br><br>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-12">
-									<div id="mensagem" class="contenedor animated rubberBand">
-										<div id="focar" class="col-md-12">
-											<table class="tabelaCache customers" id="tabela"></table>
-										</div>
-									</div>
-								</div>
+					<br><br><br><br>
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="col-md-12">
+								<table id="tabela" style="text-align: center;"></table>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 
@@ -189,4 +180,5 @@
 		</div>
 	</section>
 </body>
+
 </html>
