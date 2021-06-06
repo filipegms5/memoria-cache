@@ -186,9 +186,6 @@ function buttonCarregaBloco() {
 	msgMiss();
 	/* Cria as variaveis principais */
 	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
-	var historico = document.getElementById("historico");
-	var paragrafoHistorico = document.createElement("p");
-
 	/* Se o bloco digitado for maior ou igual a 0 executa */
 	if (blocoDigitado >= 0) {
 		/* Desabilita o campo de algoritimo*/
@@ -244,9 +241,6 @@ function buttonCarregaBloco() {
 				trocaBloco.classList.add("trocarBloco");
 				trocaBloco.classList.add("animated");
 				trocaBloco.classList.add("rubberBand");
-				paragrafoHistorico.innerHTML = "Linha: " + linhaDeEntradaDoBloco + " Bloco: " + blocoDigitado;
-				historico.appendChild(paragrafoHistorico);
-
 			}
 			/* Caso estiver cheia executa o algoritimo de substituição */
 			else {
