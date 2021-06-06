@@ -1,12 +1,12 @@
 //Arrays  do projeto
 //TODO: MUDAR NOME DAS VARIÁVEIS, FUNÇÕES E COMENTÁRIOS
 
-var arrayGlobal = []; // arrayGlobal
-var arrayFila = []; // arrayFila
-var arrayLRU = []; // arrayLRU
-var arrayCountLRU = []; // arrayCountLRU
-var arrayLFU = []; // arrayLFU
-var arrayCountLFU = []; // arrayCountLFU
+var arrGlobal = []; // arrGlobal
+var arrFila = []; // arrFila
+var arrLRU = []; // arrLRU
+var arrCountLRU = []; // arrCountLRU
+var arrLFU = []; // arrLFU
+var arrCountLFU = []; // arrCountLFU
 
 
 //Variaveis hit e miss
@@ -29,18 +29,14 @@ function showCache() {
 	document.getElementById('processo').style.display = 'block';
 }
 
-//Msg de Hit
-function msgHit() {
+//Msg de Hit e Miss
+function hitOrMiss() {
 	document.getElementById("Hit").innerHTML = "Hit: " + hit;
-}
-
-//Msg de Miss
-function msgMiss() {
 	document.getElementById("Miss").innerHTML = "Miss: " + miss;
 }
 
 //Msg de MOD
-function msgMOD(bloco, mod) {
+function exibeMod(bloco, mod) {
 	document.getElementById("ModTotal").innerHTML = bloco + " % " + montaConjuntos() + " = " + mod;
 }
 
@@ -76,17 +72,21 @@ function valorDeN() {
 	return parseInt(document.getElementById("valorDeN").value);
 }
 
+function getBloco(){
+	return parseInt(document.getElementById("carregarBloco").value);
+}
+
+function disableSelect(){
+	document.getElementById("campoSubstituicao").setAttribute('disabled', 'disabled');
+}
+
 /* Calcula quantidade de conjunto */
 function montaConjuntos() {
 	return Math.round(quantidadeDeLinha() / valorDeN()) == 0 ? 1 : Math.round(quantidadeDeLinha() / valorDeN());
 }
 
-function enfileirar(array, valor) {
+function push(array, valor) {
 	array.push(valor); // Adiciona um valor no fim do vetor
-}
-
-function desenfileirar(array) {
-	array.shift(); // Remove o primeiro item do vetor
 }
 
 //Função de criação da tabela
@@ -148,122 +148,107 @@ function createTable() {
 		hideForm(); //Esconde o form de inserção de valores
 		showCache(); //Revela o form de inserção para carregamento de bloco
 
-		msgHit(); //Mensagem de Hit
-		msgMiss(); //Mensagem de Miss
+		hitOrMiss(); //Mensagem de hit e miss
 	}
 }
 
-/* Checha se o conjunto está vazio */
-function isEmpty(operador) {
+// Checa se o conjunto está vazio 
+function isEmpty(op) {
 	for (var i = 0; i < valorDeN(); i++) {
-		if (arrayGlobal[operador] == null) {
+		if (arrGlobal[op] == null) 
 			return i;
-		}
-
-		operador++;
+		op++;
 	}
 
 	return -1;
 }
 
-/* Checa se o valor ja existe no conjunto */
-function existe(bloco, operador) {
-	var condicao = operador + valorDeN();
-	for (var i = operador; i < condicao; i++) {
-		if (arrayGlobal[i] == bloco) {
+// Checa se o valor existe
+function existe(bloco, op) {
+	for (var i = op; i < (op + valorDeN()); i++) 
+		if (arrGlobal[i] == bloco) 
 			return true;
-		}
-	}
-
 	return false;
 }
 
-/* Função para carregamento de bloco */
-function buttonCarregaBloco() {
-	msgMiss();
-	/* Cria as variaveis principais */
-	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
-	/* Se o bloco digitado for maior ou igual a 0 executa */
-	if (blocoDigitado >= 0) {
-		/* Desabilita o campo de algoritmo*/
-		document.getElementById("campoSubstituicao").setAttribute('disabled', 'disabled'); // Desabilitar
-		/* Cria variavel com o local de onde o bloco ira entrar */
-		var mod = blocoDigitado % montaConjuntos();
-		var localMemoriaCache = (mod * valorDeN());
-		/* Chama função para exibit o bloco q sai e entra */
-		msgMOD(blocoDigitado, mod);
-		/* Executa funções de prevenção como - Vazio e Existe */
-		var verificaVazio = isEmpty(localMemoriaCache);
-		var verificaExiste = existe(blocoDigitado, localMemoriaCache);
-		/* Se o bloco nao existir executa */
-		if (!verificaExiste) {
-			/* Se o conjunto nao estiver cheio executa */
-			if (verificaVazio != -1) {
-				/* Remove as mensagens de aviso */
-				document.getElementById("valorQueSai").style.display = "none"; // Desabilitar
-				document.getElementById("valorQueEntra").style.display = "none"; // Desabilitar
-				/* Cria a variavel de troca de bloco */
-				var trocaBloco = document.getElementById("array" + (localMemoriaCache + verificaVazio));
-				/* Atribui bloco digitado a um array de controle */
-				arrayGlobal[localMemoriaCache + verificaVazio] = blocoDigitado;
-				/* Insere o bloco digitado no final de cada array */
-				enfileirar(arrayFila, blocoDigitado);
-				enfileirar(arrayLFU, blocoDigitado);
-				enfileirar(arrayCountLFU, 1);
-				enfileirar(arrayLRU, blocoDigitado);
-				/* Cria variavem para posição de entrada */
-				var ultimo;
-				/* Se o tamanho do array for igual a 0 executa */
-				if (arrayCountLRU.length == 0) {
-					enfileirar(arrayCountLRU, 1);
+// Função para carregamento de bloco
+function btnLoadBlock() {
+	// Pega o bloco inserido
+	var blocoIns = getBloco();
+	// Se o bloco inserido for maior ou igual a 0 executa
+	if (blocoIns >= 0) {
+		// Desabilita o campo de seleção de algoritmo
+		disableSelect();
+		// Cria a variavel com o local em que o bloco irá entrar e uma que armazena o mod do bloco inserido
+		var modBlock = blocoIns % montaConjuntos();
+		var localMemCache = (modBlock * valorDeN());
+		// Chama função que exibe o bloco que sai e entra
+		exibeMod(blocoIns, modBlock);
+		// Se o bloco não existe dentro do conjunto
+		if (!existe(blocoIns, localMemCache)) {
+			// Se o conjunto não estiver cheio 
+			if (isEmpty(localMemCache) != -1) {
+				// Torna as mensagens de aviso invisiveis
+				document.getElementById("valorQueSai").style.display = "none"; 
+				document.getElementById("valorQueEntra").style.display = "none";
+				// Atribui bloco inserido ao array de controle e declara variavel
+				var locIndex = localMemCache + isEmpty(localMemCache)
+				arrGlobal[locIndex] = blocoIns;
+				// Insere o bloco inserido no final dos arrays
+				push(arrFila, blocoIns);
+				push(arrLFU, blocoIns);
+				push(arrCountLFU, 1);
+				push(arrLRU, blocoIns);
+				// Se o tamanho do array for igual a 0
+				if (arrCountLRU.length == 0) {
+					push(arrCountLRU, 1);
 				}
-				/* Se o valor do array for > 0 executa */
 				else {
-					/* recebe o ultimo valor do vetor */
-					ultimo = arrayCountLRU.length - 1;
-					/* for para rodar todo o vetor */
-					for (var l = 0; l < arrayCountLRU.lenght; l++) {
-						/* Se o valor atual for maior q o ultimo executa */
-						if (arrayCountLRU[l] > arrayCountLRU[ultimo]) {
-							ultimo = l;
+					// recebe o ultimo indice do vetor
+					var last = arrCountLRU.length - 1;
+					// for iterando por todo o vetor
+					for (var i = 0; i < arrCountLRU.lenght; i++) {
+						// Se o valor atual for maior q o ultimo
+						if (arrCountLRU[i] > arrCountLRU[last]) {
+							last = i;
 						}
 					}
-					/* Insere no final o maior valor do array */
-					enfileirar(arrayCountLRU, arrayCountLRU[ultimo] + 1);
+					// Insere no final do vetor o maior valor do array
+					push(arrCountLRU, arrCountLRU[last] + 1);
 				}
-				// Executa a troca de bloco e animações 
-				trocaBloco.innerHTML = "Bloco " + blocoDigitado;
+				// Executa a troca de bloco
+				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns;
 			}
-			/* Caso estiver cheia executa o algoritmo de substituição */
+			// Caso o conjunto esteja cheio roda o algoritmo de substituição
 			else {
 				algoritmoSubstituicao();
 			}
-			/* Incrementa o miss */
+			// Incrementa o miss
 			miss++;
-			msgMiss();
+			hitOrMiss();
 		}
-		/* Se o valor ja existir */
+		// Se o valor já foi inserido antes
 		else {
-			/* Incremente o hit */
+			// Incremente o hit
 			hit++;
-			msgHit();
-			/* Atualiza o valor no array de frequencia de acessos */
-			var indiceIncrementoLFU = arrayLFU.indexOf(blocoDigitado);
-			arrayCountLFU[indiceIncrementoLFU] += 1;
-			/* Atualiza o valor no array de recentes */
-			var indiceIncrementoLRU = arrayLRU.indexOf(blocoDigitado);
-			var valorFinal = arrayLRU.length - 1;
-			var valorIncremento = arrayCountLRU[valorFinal];
-			/* Executa do primeiro ao ultimo, colocando o maior valor no atual */
-			for (var k = 0; k < arrayGlobal.lenght; k++) {
-				if (arrayCountLRU[k] == valorIncremento) {
-					valorIncremento += 1;
+			hitOrMiss();
+			// Atualiza o valor no array de frequencia de acessos
+			var indexLFU = arrLFU.indexOf(blocoIns);
+			arrCountLFU[indexLFU] += 1;
+			// Atualiza o valor no array de recentes
+			var indexLRU = arrLRU.indexOf(blocoIns);
+			var finalVal = arrLRU.length - 1;
+			var incVal = arrCountLRU[finalVal];
+			// for colocando o maior valor no atual 
+			for (var i = 0; i < arrGlobal.lenght; i++) {
+				if (arrCountLRU[i] == incVal) {
+					incVal += 1;
 				}
 			}
-			arrayCountLRU[indiceIncrementoLRU] = valorIncremento + 1;
+			arrCountLRU[indexLRU] = incVal + 1;
 		}
 	}
-	/* Caso o valor digitado não for valido */
+	// Se o valor inserido for invalido
 	else {
 		alert("Tem que ter uma valor né querido!");
 	}
@@ -288,7 +273,7 @@ function algoritmoSubstituicao() {
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
 			/* Pega o indice de cada linha */
-			var indice = arrayFila.indexOf(arrayGlobal[i]);
+			var indice = arrFila.indexOf(arrGlobal[i]);
 			/* Se ele for menor que o indice auxiliar troca valores */
 			if (indice < aux) {
 				aux = indice;
@@ -302,11 +287,11 @@ function algoritmoSubstituicao() {
 		/* Cria variavel para trocar bloco */
 		var trocaBloco = document.getElementById("array" + indiceFim);
 		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(arrayFila[aux], blocoDigitado);
+		mostraValorQueSai(arrFila[aux], blocoDigitado);
 		/* Remove o elementro da fila e insere o novo no final */
-		arrayFila.splice(aux, 1);
-		enfileirar(arrayFila, blocoDigitado);
-		arrayGlobal[indiceFim] = blocoDigitado;
+		arrFila.splice(aux, 1);
+		push(arrFila, blocoDigitado);
+		arrGlobal[indiceFim] = blocoDigitado;
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
@@ -316,30 +301,30 @@ function algoritmoSubstituicao() {
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
 			/* Pega o indice de cada linha */
-			var indiceArrayLFU = arrayLFU.indexOf(arrayGlobal[i]);
+			var indiceArrayLFU = arrLFU.indexOf(arrGlobal[i]);
 			/* Se os acessos da posição deste indice for menor
 			   que o valor do indice auxiliar troca  		 */
-			if (arrayCountLFU[indiceArrayLFU] < valorAux) {
+			if (arrCountLFU[indiceArrayLFU] < valorAux) {
 				aux = indiceArrayLFU;
-				valorAux = arrayCountLFU[indiceArrayLFU];
+				valorAux = arrCountLFU[indiceArrayLFU];
 				indiceFim = localMemoriaCache + j++;
 			}
 			/* Se não incrementa o J */
-			else if (arrayCountLFU[indiceArrayLFU] >= valorAux) {
+			else if (arrCountLFU[indiceArrayLFU] >= valorAux) {
 				j++;
 			}
 
 		}
 		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(arrayLFU[aux], blocoDigitado);
+		mostraValorQueSai(arrLFU[aux], blocoDigitado);
 		/* Cria variavel para trocar bloco */
 		var trocaBloco = document.getElementById("array" + indiceFim);
 		/* Remove o elemento e insere o outro no final do array com acesso = 1 */
-		arrayLFU.splice(aux, 1);
-		arrayCountLFU.splice(aux, 1);
-		enfileirar(arrayLFU, blocoDigitado);
-		enfileirar(arrayCountLFU, 1);
-		arrayGlobal[indiceFim] = blocoDigitado;
+		arrLFU.splice(aux, 1);
+		arrCountLFU.splice(aux, 1);
+		push(arrLFU, blocoDigitado);
+		push(arrCountLFU, 1);
+		arrGlobal[indiceFim] = blocoDigitado;
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
@@ -349,32 +334,32 @@ function algoritmoSubstituicao() {
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
 			/* Pega o indice de cada linha */
-			var indiceArrayLRU = arrayLRU.indexOf(arrayGlobal[i]);
+			var indiceArrayLRU = arrLRU.indexOf(arrGlobal[i]);
 			/* Se os acessos da posição deste indice for menor
 			   que o valor do indice auxiliar troca  		 */
-			if (arrayCountLRU[indiceArrayLRU] < valorAux) {
+			if (arrCountLRU[indiceArrayLRU] < valorAux) {
 				aux = indiceArrayLRU;
-				valorAux = arrayCountLRU[indiceArrayLRU];
+				valorAux = arrCountLRU[indiceArrayLRU];
 				indiceFim = localMemoriaCache + j++;
 			}
 			/* Se não incrementa o J */
-			else if (arrayCountLRU[indiceArrayLRU] >= valorAux) {
+			else if (arrCountLRU[indiceArrayLRU] >= valorAux) {
 				j++;
 			}
 		}
 		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(arrayLRU[aux], blocoDigitado);
+		mostraValorQueSai(arrLRU[aux], blocoDigitado);
 		/* Pega o valor final do conjunto */
-		var valorFinal = arrayLRU.indexOf(arrayGlobal[condicao - 1]);
-		enfileirar(arrayCountLRU, arrayCountLRU[valorFinal] + 1);
+		var valorFinal = arrLRU.indexOf(arrGlobal[condicao - 1]);
+		push(arrCountLRU, arrCountLRU[valorFinal] + 1);
 		/* Cria variavel para trocar bloco */
 		var trocaBloco = document.getElementById("array" + indiceFim);
 		/* Remove o elemento e insere o outro no final do array com o maior valor +1 */
-		arrayLRU.splice(aux, 1);
-		arrayCountLRU.splice(aux, 1);
-		enfileirar(arrayLRU, blocoDigitado);
+		arrLRU.splice(aux, 1);
+		arrCountLRU.splice(aux, 1);
+		push(arrLRU, blocoDigitado);
 		/* Troca bloco e adiciona animações */
-		arrayGlobal[indiceFim] = blocoDigitado;
+		arrGlobal[indiceFim] = blocoDigitado;
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
 }
