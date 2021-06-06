@@ -1,30 +1,33 @@
+//Arrays  do projeto
 var arrayGlobal = [];
 var arrayFila = [];
 var arrayLRU = [];
 var arrayCountLRU = [];
 var arrayLFU = [];
 var arrayCountLFU = [];
+
+//Variaveis hit e miss
 var hit = 0;
 var miss = 0;
 
 //Função (ou funções) ao carregar a página
 window.onload = function() {
 	document.getElementById('processo').style.display = 'none';
-  };
+};
 
-/* Função para habilitar e desabilitar campos */
+// Esconde o form de inserção de valores
 function hideForm(){
 	document.getElementById('mainForm').style.display = 'none';
+	document.getElementById("insertValTitle").innerHTML="<b>MEMÓRIA CACHE</b>";
 }
 
-/* Função para criar a mensagem de hit */
+//Msg de Hit
 function criaAttHit() {
 	var criar = document.getElementById("Hit");
 	criar.innerHTML = "Hit: " + hit;
 }
 
-
-/* Função para criar a mensagem de miss */
+//Msg de Miss
 function criaAttMiss() {
 	var criar = document.getElementById("Miss");
 	criar.innerHTML = "Miss: " + miss;
@@ -61,15 +64,6 @@ function mostraValorQueSai(valorIni, valorFim) {
 	sai.style.color = "red";
 	entra.innerHTML = "Bloco que entra: " + valorFim;
 	entra.style.color = "green";
-}
-
-/* Pega a data atual HH:MM:SS */
-function dataAtual() {
-	var data = new Date();
-	var hora = data.getHours();
-	var minuto = data.getMinutes();
-	var segundo = data.getSeconds();
-	return hora + ":" + minuto + ":" + segundo;
 }
 
 /* Função para retornar valor da memoria principal */
@@ -191,11 +185,6 @@ function checaExiste(bloco, operador) {
 	return false;
 }
 
-/* Quando o bloco for digitado, mover a pagina para ele */
-function redirecionaBloco(bloco) {
-	bloco.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
 /* Função para carregamento de bloco */
 function buttonCarregaBloco() {
 	criaAttMiss();
@@ -227,8 +216,6 @@ function buttonCarregaBloco() {
 				document.getElementById("valorQueEntra").style.display = "none"; // Desabilitar
 				/* Cria a variavel de troca de bloco */
 				var trocaBloco = document.getElementById("array" + (localMemoriaCache + verificaVazio));
-				/* Função de movimento da tela */
-				redirecionaBloco(trocaBloco);
 				/* Atribui bloco digitado a um array de controle */
 				arrayGlobal[localMemoriaCache + verificaVazio] = blocoDigitado;
 				/* Insere o bloco digitado no final de cada array */
