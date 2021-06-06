@@ -56,22 +56,22 @@ function mostraValorQueSai(valorIni, valorFim) {
 	e.innerHTML = '<b>Bloco que entra: </b>' + valorFim;
 }
 
-/* Função para retornar valor da memoria principal */
+/* Função para parse e retornar valor da memoria principal */
 function memoriaPrincipal() {
 	return parseInt(document.getElementById("tamanhoMemoria").value);
 }
 
-/* Função para retornar valor do tamanho do bloco */
+/* Função para parse e retornar valor do tamanho do bloco */
 function tamanhoDoBloco() {
 	return parseInt(document.getElementById("tamanhoBloco").value);
 }
 
-/* Função para retornar valor da quantidade de linha */
+/* Função para parse e retornar valor da quantidade de linha */
 function quantidadeDeLinha() {
 	return parseInt(document.getElementById("quantidadeLinha").value);
 }
 
-/* Função para retornar valor de N */
+/* Função para dar parse e retornar valor de N */
 function valorDeN() {
 	return parseInt(document.getElementById("valorDeN").value);
 }
@@ -93,10 +93,10 @@ function desenfileirar(array) {
 function createTable() {
 
 	//Variáveis recebem os valores estipulados pelo usuário:
-	var mPrincipal = document.getElementById("tamanhoMemoria").value;
-	var tamBloco = document.getElementById("tamanhoBloco").value;
-	var qtLinhas = document.getElementById("quantidadeLinha").value;
-	var valorN = document.getElementById("valorDeN").value;
+	var mPrincipal = memoriaPrincipal();
+	var tamBloco = tamanhoDoBloco();
+	var qtLinhas = quantidadeDeLinha();
+	var valorN = valorDeN();
 
 	//Verifica se existe algum valor vazio nos imputs e dispara um alerta caso tenha.
 	if (mPrincipal == '' || tamBloco == '' 
@@ -107,7 +107,6 @@ function createTable() {
 		//Variaveis que criam a  tabela
 		var tabela = document.getElementById("tabela");
 		var tbody = document.createElement("tbody");
-		var tdata = document.createElement("td");
 		var numeroConjunto = 0; // Numero do conjunto apontado pelo usuário
 
 
@@ -190,7 +189,7 @@ function buttonCarregaBloco() {
 	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
 	/* Se o bloco digitado for maior ou igual a 0 executa */
 	if (blocoDigitado >= 0) {
-		/* Desabilita o campo de algoritimo*/
+		/* Desabilita o campo de algoritmo*/
 		document.getElementById("campoSubstituicao").setAttribute('disabled', 'disabled'); // Desabilitar
 		/* Cria variavel com o local de onde o bloco ira entrar */
 		var mod = blocoDigitado % montaConjuntos();
@@ -239,9 +238,9 @@ function buttonCarregaBloco() {
 				// Executa a troca de bloco e animações 
 				trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 			}
-			/* Caso estiver cheia executa o algoritimo de substituição */
+			/* Caso estiver cheia executa o algoritmo de substituição */
 			else {
-				algoritimoSubstituicao();
+				algoritmoSubstituicao();
 			}
 			/* Incrementa o miss */
 			miss++;
@@ -274,10 +273,10 @@ function buttonCarregaBloco() {
 	}
 }
 
-/* Executa o algoritimo de substituição */
-function algoritimoSubstituicao() {
+/* Executa o algoritmo de substituição */
+function algoritmoSubstituicao() {
 	/* Cria variaveis para troca de blocos */
-	var algoritimo = document.getElementById("campoSubstituicao").value;
+	var algoritmo = document.getElementById("campoSubstituicao").value;
 	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
 	var mod = blocoDigitado % montaConjuntos();
 	var localMemoriaCache = (mod * valorDeN());
@@ -287,8 +286,8 @@ function algoritimoSubstituicao() {
 	var j = 0;
 	var condicao = localMemoriaCache + valorDeN();
 
-	/* Se o algoritimo for FIFO executa */
-	if (algoritimo == 'FIFO') {
+	/* Se o algoritmo for FIFO executa */
+	if (algoritmo == 'FIFO') {
 		/* Começa na linha do primeiro bloco do conjunto e vai
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
@@ -315,8 +314,8 @@ function algoritimoSubstituicao() {
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
-	/* Se o algoritimo for LFU executa */
-	else if (algoritimo == 'LFU') {
+	/* Se o algoritmo for LFU executa */
+	else if (algoritmo == 'LFU') {
 		/* Começa na linha do primeiro bloco do conjunto e vai
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
@@ -348,8 +347,8 @@ function algoritimoSubstituicao() {
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
-	/* Se o algoritimo selecionado for o LRU executa */
-	else if (algoritimo == 'LRU') {
+	/* Se o algoritmo selecionado for o LRU executa */
+	else if (algoritmo == 'LRU') {
 		/* Começa na linha do primeiro bloco do conjunto e vai
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
