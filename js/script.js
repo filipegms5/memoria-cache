@@ -86,7 +86,7 @@ function valorDeN() { return parseInt(document.getElementById("valorN").value); 
 
 /* Calcula quantidade de conjunto */
 function montaConjuntos() {
-	return quantidadeDeLinha() / valorDeN();
+	return Math.floor(quantidadeDeLinha() / valorDeN());
 }
 
 /* Cria tabela dinamicamente */
