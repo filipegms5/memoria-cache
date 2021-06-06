@@ -44,8 +44,7 @@
 		<div class="container">
 			<h1 style="margin-left: 35%;" class="grey-text"><b>Inserção de valores</b></h1><br><br>
 			<div class="row" id="carregamento">
-				<div id="mensagem"></div>
-				<form class="col-md-12 centralize">
+				<form class="col-md-12 centralize" id="mainForm">
 					<div class="mb-3 centralize">
 						<label for="tamanhoMemoria" class="form-label grey-text">Memória principal:</label>
 						<input class="form-control" id="tamanhoMemoria" style="width: 50%;">
@@ -73,7 +72,7 @@
 					<label class="grey-text">Selecione um Algoritmo: </label><br>
 					<select onclick="selecionouAlgoritimo()" id="campoSubstituicao"
 						style="width:25%; display: inline;border-color: black;" class="form-control hvr-float-shadow ">
-						<option value="FIFO">FIFO</option>
+						<option value="FIFO" selected="selected">FIFO</option>
 						<option value="LRU">LRU</option>
 						<option value="LFU">LFU</option>
 					</select><br><br>

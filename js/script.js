@@ -13,31 +13,8 @@ window.onload = function() {
   };
 
 /* Função para habilitar e desabilitar campos */
-function troca(op) {
-	if (op == 'on') { // Desabilita os campos após clique
-		document.getElementById("tamanhoMemoria").removeAttribute('disabled'); // Habilitar
-		document.getElementById("tamanhoBloco").removeAttribute('disabled'); // Habilitar
-		document.getElementById("quantidadeLinha").removeAttribute('disabled'); // Habilitar
-		document.getElementById("valorN").removeAttribute('disabled'); // Habilitar
-		document.getElementById("botaoEnvia").removeAttribute('disabled'); // Habilitar
-	}
-
-	else { // Habilita os campos após clique
-		document.getElementById("tamanhoMemoria").setAttribute('disabled', 'disabled'); // Desabilitar
-		document.getElementById("tamanhoBloco").setAttribute('disabled', 'disabled'); // Desabilitar
-		document.getElementById("quantidadeLinha").setAttribute('disabled', 'disabled'); // Desabilitar
-		document.getElementById("valorN").setAttribute('disabled', 'disabled'); // Desabilitar
-		document.getElementById("botaoEnvia").setAttribute('disabled', 'disabled'); // Desabilitar 
-		/* Classe Div */
-		document.getElementById("carregamento").classList.add("cadastramento"); // Setar Classe
-	}
-}
-
-/* Função para criar a mensagem de atenção */
-function criaAttAtencao() {
-	var criar = document.getElementById("Atencao");
-	criar.style.color = 'red';
-	criar.innerHTML = "Para ativar os campos selecione um algoritimo";
+function hideForm(){
+	document.getElementById('mainForm').style.display = 'none';
 }
 
 /* Função para criar a mensagem de hit */
@@ -114,7 +91,6 @@ function montaConjuntos() {
 
 /* Cria tabela dinamicamente */
 function criaTabela() {
-	document.getElementById('mensagem').style.display = 'none';
 	/* Busca valores nas funções */
 	var memoriaPrin = document.getElementById("tamanhoMemoria").value;
 	var tamanhoBloco = document.getElementById("tamanhoBloco").value;
@@ -180,16 +156,16 @@ function criaTabela() {
 		tabela.classList.add("animated");
 		tabela.classList.add("fadeInDownBig");
 		tabela.appendChild(tbody);
-		/* Chama a função para desativar os campos de interação */
-		troca('off');
+		/* Chama a função que esconde o formulário */
+		hideForm();
 		/* Chama a função que ativa o input para carregar bloco */
 		ativarCarregamento();
 		/* Criar Hit */
 		criaAttHit();
 		/* Criar Miss */
 		criaAttMiss();
-		/* Mensagem de atenção */
-		criaAttAtencao();
+		/* Chamar a próxima parte do algoritmo */
+		selecionouAlgoritimo();
 	}
 }
 
