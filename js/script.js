@@ -85,7 +85,7 @@ function enfileirar(array, valor) {
 	array.push(valor); // Adiciona um valor no fim do vetor
 }
 
-function desenfileirar(array) { 
+function desenfileirar(array) {
 	array.shift(); // Remove o primeiro item do vetor
 }
 
@@ -99,8 +99,8 @@ function createTable() {
 	var valorN = valorDeN();
 
 	//Verifica se existe algum valor vazio nos imputs e dispara um alerta caso tenha.
-	if (mPrincipal == '' || tamBloco == '' 
-	|| qtLinhas == '' || valorN == '') {
+	if (mPrincipal == '' || tamBloco == ''
+		|| qtLinhas == '' || valorN == '') {
 
 		alert("Preencha todos os campos fazeno o favor.");
 	} else {
@@ -109,12 +109,12 @@ function createTable() {
 		var tbody = document.createElement("tbody");
 		var numeroConjunto = 0; // Numero do conjunto apontado pelo usuário
 
+		//Linhas
+		for (var linha = 0; linha < qtLinhas; linha++) {
+			var trRow = document.createElement("tr");
+			var tdData = document.createElement("td");
 
-		for (var linha = 0; linha < qtLinhas; linha++) {//linhas
-			var trRow = document.createElement("tr"); /* Linha Nome conjunto */
-			var tdData = document.createElement("td"); /* Dados Nome conjunto */
-			
-			/* Se o valor do momento % o valor de N for igual a 0 Deve ser exibido o Nome conjunto */
+			// Conjuntos
 			if (linha % valorN == 0) {
 				tdData.innerHTML = "Conjunto " + numeroConjunto++;
 				tdData.colSpan = 2;
@@ -126,27 +126,23 @@ function createTable() {
 			/* Linha para as colunas - Excessão do nome do conjunto */
 			var tr = document.createElement("tr");
 
-			
-			for (var col = 0; col < 3; col++) { //colunas
-				/* Cria as colunas - Excessão do nome do conjunto */
+			//Colunas
+			for (var col = 0; col < 3; col++) { 
 				var td = document.createElement("td");
-				/* Onde deve ser armazenado o bloco */
+
+				//blocos
 				if (col == 0) {
 					td.id = "array" + linha;
-					td.style.width = "75%";
-					td.innerHTML = "vazio";
+					td.innerHTML = "Vazio";
 					tr.appendChild(td);
 				}
-				/* Exibição da linha */
 				else if (col == 1) {
-					td.innerHTML = "linha " + linha;
+					td.innerHTML = "Linha " + linha;
 					tr.appendChild(td);
 				}
 			}
-			/* Concatena tudo no body */
 			tbody.appendChild(tr);
 		}
-		/* Coloca na tabela */
 		tabela.appendChild(tbody);
 
 		hideForm(); //Esconde o form de inserção de valores
@@ -269,7 +265,7 @@ function buttonCarregaBloco() {
 	}
 	/* Caso o valor digitado não for valido */
 	else {
-		alert("Favor preencher com um valor válido");
+		alert("Tem que ter uma valor né querido!");
 	}
 }
 
