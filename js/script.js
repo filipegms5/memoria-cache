@@ -1,4 +1,5 @@
 //Arrays  do projeto
+//TODO: MUDAR NOME DAS VARIÁVEIS, FUNÇÕES E COMENTÁRIOS
 var arrayGlobal = [];
 var arrayFila = [];
 var arrayLRU = [];
@@ -12,91 +13,86 @@ var hit = 0;
 var miss = 0;
 
 //Função (ou funções) ao carregar a página
-window.onload = function() {
+window.onload = function () {
 	document.getElementById('processo').style.display = 'none';
 };
 
 // Esconde o form de inserção de valores
-function hideForm(){
+function hideForm() {
 	document.getElementById('mainForm').style.display = 'none';
-	document.getElementById("insertValTitle").innerHTML="<b>MEMÓRIA CACHE</b>";
+	document.getElementById("insertValTitle").innerHTML = "<b>MEMÓRIA CACHE</b>";
+}
+
+//Revela o form de inserção para carregamento de bloco
+function showCache() {
+	document.getElementById('processo').style.display = 'block';
 }
 
 //Msg de Hit
-function criaAttHit() {
-	var criar = document.getElementById("Hit");
-	criar.innerHTML = "Hit: " + hit;
+function msgHit() {
+	document.getElementById("Hit").innerHTML = "Hit: " + hit;
 }
 
 //Msg de Miss
-function criaAttMiss() {
-	var criar = document.getElementById("Miss");
-	criar.innerHTML = "Miss: " + miss;
+function msgMiss() {
+	document.getElementById("Miss").innerHTML = "Miss: " + miss;
 }
 
-/* Função para criar a mensagem de mod */
-function criaAttMod(bloco, mod) {
-	var criar = document.getElementById("ModTotal");
-	criar.innerHTML = bloco + "%" + montaConjuntos() + "=" + mod;
+//Msg de MOD
+function msgMOD(bloco, mod) {
+	document.getElementById("ModTotal").innerHTML = bloco + "%" + montaConjuntos() + "=" + mod;
 }
 
-/* Função para ativar os campos do carregamento de bloco */
-function ativarCarregamento() {
-	document.getElementById('processo').style.display = 'block';
-	document.getElementById('processo').setAttribute('disabled', 'disabled');
-	document.getElementById("carregarBloco").setAttribute('disabled', 'disabled');
-	document.getElementById("botaoCarrega").setAttribute('disabled', 'disabled');
-}
-
-/* Após selecionar algoritimo, ativar e desativar campos de interação com usuario */
-function selecionouAlgoritimo() {
-	document.getElementById("carregarBloco").removeAttribute('disabled'); // Habilitar
-	document.getElementById("botaoCarrega").removeAttribute('disabled'); // Habilitar
-	document.getElementById('Atencao').style.display = 'none';
-}
-
-/* Função para criar a mensagem saida e entrada de bloco */
+// Criação dos valores de entrada e saída para display ao usuário 
 function mostraValorQueSai(valorIni, valorFim) {
-	var sai = document.getElementById("valorQueSai");
-	var entra = document.getElementById("valorQueEntra");
+	var s = document.getElementById("valorQueSai");
+	var e = document.getElementById("valorQueEntra");
 
-	sai.style.display = "block";
-	entra.style.display = "block";
+	s.style.display = "block";
+	e.style.display = "block";
 
-	sai.innerHTML = '<b>Bloco que sai: </b>' + valorIni;
-	entra.innerHTML = '<b>Bloco que entra: </b>' + valorFim;
+	s.innerHTML = '<b>Bloco que sai: </b>' + valorIni;
+	e.innerHTML = '<b>Bloco que entra: </b>' + valorFim;
 }
 
 /* Função para retornar valor da memoria principal */
-function memoriaPrincipal() { return parseInt(document.getElementById("tamanhoMemoria").value); }
+function memoriaPrincipal() {
+	return parseInt(document.getElementById("tamanhoMemoria").value);
+}
 
 /* Função para retornar valor do tamanho do bloco */
-function tamanhoDoBloco() { return parseInt(document.getElementById("tamanhoBloco").value); }
+function tamanhoDoBloco() {
+	return parseInt(document.getElementById("tamanhoBloco").value);
+}
 
 /* Função para retornar valor da quantidade de linha */
-function quantidadeDeLinha() { return parseInt(document.getElementById("quantidadeLinha").value); }
+function quantidadeDeLinha() {
+	return parseInt(document.getElementById("quantidadeLinha").value);
+}
 
 /* Função para retornar valor de N */
-function valorDeN() { return parseInt(document.getElementById("valorN").value); }
+function valorDeN() {
+	return parseInt(document.getElementById("valorN").value);
+}
 
 /* Calcula quantidade de conjunto */
 function montaConjuntos() {
 	return Math.round(quantidadeDeLinha() / valorDeN()) == 0 ? 1 : Math.round(quantidadeDeLinha() / valorDeN());
 }
 
-/* Cria tabela dinamicamente */
+//Função de criação da tabela
 function criaTabela() {
-	/* Busca valores nas funções */
+
+	//Variáveis recebem os valores estipulados pelo usuário:
 	var memoriaPrin = document.getElementById("tamanhoMemoria").value;
 	var tamanhoBloco = document.getElementById("tamanhoBloco").value;
 	var quantidadeLinha = document.getElementById("quantidadeLinha").value;
 	var valorN = document.getElementById("valorN").value;
 
-	/* Se algum valor estiver vazio, retornar mensagem de erro */
-	if (memoriaPrin == '' || tamanhoBloco == '' || quantidadeLinha == '' || valorN == '') {
-		alert("Campos obrigatorios não preenchidos.");
-	}
-	else {
+	//Verifica se existe algum valor vazio nos imputs e dispara um alerta caso tenha.
+	if (memoriaPrin == '' || tamanhoBloco == '' || quantidadeLinha == '' || valorN == '') { // TODO: trocar a ordem dos valores desse  if;
+		alert("Preencha todos os campos fazeno o favor.");
+	} else {
 		/* Busca na função a quantidade de conjuntos */
 		quantidadeDeConjuntos = montaConjuntos(quantidadeLinha, valorN);
 
@@ -151,44 +147,43 @@ function criaTabela() {
 		tabela.classList.add("animated");
 		tabela.classList.add("fadeInDownBig");
 		tabela.appendChild(tbody);
-		/* Chama a função que esconde o formulário */
-		hideForm();
-		/* Chama a função que ativa o input para carregar bloco */
-		ativarCarregamento();
-		/* Criar Hit */
-		criaAttHit();
-		/* Criar Miss */
-		criaAttMiss();
-		/* Chamar a próxima parte do algoritmo */
-		selecionouAlgoritimo();
+
+		hideForm();//Esconde o form de inserção de valores
+		showCache(); //Revela o form de inserção para carregamento de bloco
+
+		msgHit(); //Mensagem de Hit
+		msgMiss(); //Mensagem de Miss
 	}
 }
 
 /* Checha se o conjunto está vazio */
-function checaVazio(operador) {
+function isEmpty(operador) {
 	for (var i = 0; i < valorDeN(); i++) {
 		if (arrayGlobal[operador] == null) {
 			return i;
 		}
+
 		operador++;
 	}
+
 	return -1;
 }
 
 /* Checa se o valor ja existe no conjunto */
-function checaExiste(bloco, operador) {
+function existe(bloco, operador) {
 	var condicao = operador + valorDeN();
 	for (var i = operador; i < condicao; i++) {
 		if (arrayGlobal[i] == bloco) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
 /* Função para carregamento de bloco */
 function buttonCarregaBloco() {
-	criaAttMiss();
+	msgMiss();
 	/* Cria as variaveis principais */
 	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
 	var historico = document.getElementById("historico");
@@ -202,10 +197,10 @@ function buttonCarregaBloco() {
 		var mod = blocoDigitado % montaConjuntos();
 		var localMemoriaCache = (mod * valorDeN());
 		/* Chama função para exibit o bloco q sai e entra */
-		criaAttMod(blocoDigitado, mod);
+		msgMOD(blocoDigitado, mod);
 		/* Executa funções de prevenção como - Vazio e Existe */
-		var verificaVazio = checaVazio(localMemoriaCache);
-		var verificaExiste = checaExiste(blocoDigitado, localMemoriaCache);
+		var verificaVazio = isEmpty(localMemoriaCache);
+		var verificaExiste = existe(blocoDigitado, localMemoriaCache);
 		var linhaDeEntradaDoBloco = localMemoriaCache + verificaVazio;
 		var condicao = localMemoriaCache + valorDeN();
 		/* Se o bloco nao existir executa */
@@ -259,13 +254,13 @@ function buttonCarregaBloco() {
 			}
 			/* Incrementa o miss */
 			miss++;
-			criaAttMiss();
+			msgMiss();
 		}
 		/* Se o valor ja existir */
 		else {
 			/* Incremente o hit */
 			hit++;
-			criaAttHit();
+			msgHit();
 			/* Atualiza o valor no array de frequencia de acessos */
 			var indiceIncrementoLFU = arrayLFU.indexOf(blocoDigitado);
 			arrayCountLFU[indiceIncrementoLFU] += 1;
