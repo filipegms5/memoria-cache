@@ -1,11 +1,12 @@
 //Arrays  do projeto
 //TODO: MUDAR NOME DAS VARIÁVEIS, FUNÇÕES E COMENTÁRIOS
-var arrayGlobal = [];
-var arrayFila = [];
-var arrayLRU = [];
-var arrayCountLRU = [];
-var arrayLFU = [];
-var arrayCountLFU = [];
+
+var arrayGlobal = []; // arrayGlobal
+var arrayFila = []; // arrayFila
+var arrayLRU = []; // arrayLRU
+var arrayCountLRU = []; // arrayCountLRU
+var arrayLFU = []; // arrayLFU
+var arrayCountLFU = []; // arrayCountLFU
 
 
 //Variaveis hit e miss
@@ -40,7 +41,7 @@ function msgMiss() {
 
 //Msg de MOD
 function msgMOD(bloco, mod) {
-	document.getElementById("ModTotal").innerHTML = bloco + "%" + montaConjuntos() + "=" + mod;
+	document.getElementById("ModTotal").innerHTML = bloco + " % " + montaConjuntos() + " = " + mod;
 }
 
 // Criação dos valores de entrada e saída para display ao usuário 
@@ -72,7 +73,7 @@ function quantidadeDeLinha() {
 
 /* Função para retornar valor de N */
 function valorDeN() {
-	return parseInt(document.getElementById("valorN").value);
+	return parseInt(document.getElementById("valorDeN").value);
 }
 
 /* Calcula quantidade de conjunto */
@@ -80,63 +81,66 @@ function montaConjuntos() {
 	return Math.round(quantidadeDeLinha() / valorDeN()) == 0 ? 1 : Math.round(quantidadeDeLinha() / valorDeN());
 }
 
+function enfileirar(array, valor) {
+	array.push(valor); // Adiciona um valor no fim do vetor
+}
+
+function desenfileirar(array) { 
+	array.shift(); // Remove o primeiro item do vetor
+}
+
 //Função de criação da tabela
-function criaTabela() {
+function createTable() {
 
 	//Variáveis recebem os valores estipulados pelo usuário:
-	var memoriaPrin = document.getElementById("tamanhoMemoria").value;
-	var tamanhoBloco = document.getElementById("tamanhoBloco").value;
-	var quantidadeLinha = document.getElementById("quantidadeLinha").value;
-	var valorN = document.getElementById("valorN").value;
+	var mPrincipal = document.getElementById("tamanhoMemoria").value;
+	var tamBloco = document.getElementById("tamanhoBloco").value;
+	var qtLinhas = document.getElementById("quantidadeLinha").value;
+	var valorN = document.getElementById("valorDeN").value;
 
 	//Verifica se existe algum valor vazio nos imputs e dispara um alerta caso tenha.
-	if (memoriaPrin == '' || tamanhoBloco == '' || quantidadeLinha == '' || valorN == '') { // TODO: trocar a ordem dos valores desse  if;
+	if (mPrincipal == '' || tamBloco == '' 
+	|| qtLinhas == '' || valorN == '') {
+
 		alert("Preencha todos os campos fazeno o favor.");
 	} else {
-		/* Busca na função a quantidade de conjuntos */
-		quantidadeDeConjuntos = montaConjuntos(quantidadeLinha, valorN);
-
-		/* Cria elemento */
+		//Variaveis que criam a  tabela
 		var tabela = document.getElementById("tabela");
 		var tbody = document.createElement("tbody");
 		var tdata = document.createElement("td");
+		var numeroConjunto = 0; // Numero do conjunto apontado pelo usuário
 
-		/* Variavel que vai ser usada para exibição do conjunto */
-		var m = 0;
 
-		/* Cria as linhas */
-		for (var j = 0; j < quantidadeLinha; j++) {
-			/* Linha Nome conjunto */
-			var trow = document.createElement("tr");
-			/* Dados Nome conjunto */
-			var tdata = document.createElement("td");
-			/* Se o valor do momento % o valor de N for igual a 0
-			   Deve ser exibido o Nome conjunto */
-			if (j % valorN == 0) {
-				tdata.innerHTML = "Conjunto " + m++;
-				tdata.colSpan = 2;
-				tdata.classList.add("tableTitle");
-				trow.appendChild(tdata).colSpan = 2;
-				tbody.appendChild(trow);
+		for (var linha = 0; linha < qtLinhas; linha++) {//linhas
+			var trRow = document.createElement("tr"); /* Linha Nome conjunto */
+			var tdData = document.createElement("td"); /* Dados Nome conjunto */
+			
+			/* Se o valor do momento % o valor de N for igual a 0 Deve ser exibido o Nome conjunto */
+			if (linha % valorN == 0) {
+				tdData.innerHTML = "Conjunto " + numeroConjunto++;
+				tdData.colSpan = 2;
+				tdData.classList.add("tableTitle");
+				trRow.appendChild(tdData).colSpan = 2;
+				tbody.appendChild(trRow);
 			}
 
 			/* Linha para as colunas - Excessão do nome do conjunto */
 			var tr = document.createElement("tr");
 
-			/* Cria as oolunas */
-			for (var i = 0; i < 3; i++) {
+			
+			for (var col = 0; col < 3; col++) { //colunas
 				/* Cria as colunas - Excessão do nome do conjunto */
 				var td = document.createElement("td");
 				/* Onde deve ser armazenado o bloco */
-				if (i == 0) {
-					td.id = "array" + j;
+				if (col == 0) {
+					td.id = "array" + linha;
 					td.style.width = "75%";
 					td.innerHTML = "vazio";
 					tr.appendChild(td);
 				}
 				/* Exibição da linha */
-				else if (i == 1) {
-					td.innerHTML = "linha " + j;
+				else if (col == 1) {
+					td.innerHTML = "linha " + linha;
 					tr.appendChild(td);
 				}
 			}
@@ -144,11 +148,9 @@ function criaTabela() {
 			tbody.appendChild(tr);
 		}
 		/* Coloca na tabela */
-		tabela.classList.add("animated");
-		tabela.classList.add("fadeInDownBig");
 		tabela.appendChild(tbody);
 
-		hideForm();//Esconde o form de inserção de valores
+		hideForm(); //Esconde o form de inserção de valores
 		showCache(); //Revela o form de inserção para carregamento de bloco
 
 		msgHit(); //Mensagem de Hit
@@ -236,9 +238,6 @@ function buttonCarregaBloco() {
 				}
 				// Executa a troca de bloco e animações 
 				trocaBloco.innerHTML = "Bloco " + blocoDigitado;
-				trocaBloco.classList.add("trocarBloco");
-				trocaBloco.classList.add("animated");
-				trocaBloco.classList.add("rubberBand");
 			}
 			/* Caso estiver cheia executa o algoritimo de substituição */
 			else {
@@ -273,7 +272,6 @@ function buttonCarregaBloco() {
 	else {
 		alert("Favor preencher com um valor válido");
 	}
-
 }
 
 /* Executa o algoritimo de substituição */
@@ -283,11 +281,12 @@ function algoritimoSubstituicao() {
 	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
 	var mod = blocoDigitado % montaConjuntos();
 	var localMemoriaCache = (mod * valorDeN());
-	var aux = 100000;
-	var valorAux = 100000;
+	var aux = Number.MAX_VALUE;
+	var valorAux = Number.MAX_VALUE;
 	var indiceFim = 0;
 	var j = 0;
 	var condicao = localMemoriaCache + valorDeN();
+
 	/* Se o algoritimo for FIFO executa */
 	if (algoritimo == 'FIFO') {
 		/* Começa na linha do primeiro bloco do conjunto e vai
@@ -315,9 +314,6 @@ function algoritimoSubstituicao() {
 		arrayGlobal[indiceFim] = blocoDigitado;
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
-		trocaBloco.classList.add("trocarBloco");
-		trocaBloco.classList.add("animated");
-		trocaBloco.classList.add("rubberBand");
 	}
 	/* Se o algoritimo for LFU executa */
 	else if (algoritimo == 'LFU') {
@@ -351,9 +347,6 @@ function algoritimoSubstituicao() {
 		arrayGlobal[indiceFim] = blocoDigitado;
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
-		trocaBloco.classList.add("trocarBloco");
-		trocaBloco.classList.add("animated");
-		trocaBloco.classList.add("rubberBand");
 	}
 	/* Se o algoritimo selecionado for o LRU executa */
 	else if (algoritimo == 'LRU') {
@@ -388,23 +381,5 @@ function algoritimoSubstituicao() {
 		/* Troca bloco e adiciona animações */
 		arrayGlobal[indiceFim] = blocoDigitado;
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
-		trocaBloco.classList.add("trocarBloco");
-		trocaBloco.classList.add("animated");
-		trocaBloco.classList.add("rubberBand");
 	}
 }
-
-/* Inicio Algortimo de FILA */
-/*
- * CLASSE FILA - IMPLEMENTA O TIPO ABSTRATO DE DADOS FILA ESTÁTICA CIRCULAR
- * OPERAÇÕES: *
- *	enfileirar(x) -> coloca o elemento x no fim da fila.
- *	desenfileirar() -> retorna o elemento situado no inicio da fila.
- */
-function enfileirar(array, valor) {
-	array.push(valor);
-}
-function desenfileirar(array) {
-	array.shift();
-}
-/* Fim Algortimo de FILA */

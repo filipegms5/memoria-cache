@@ -61,16 +61,15 @@
 					<div class="mb-3 centralize">
 						<label for="exampleInputPassword1" class="form-label grey-text" style="width: 50%;">Valor de
 							N:</label>
-						<input class="form-control" id="valorN" style="width: 50%;">
+						<input class="form-control" id="valorDeN" style="width: 50%;">
 					</div> <br>
 					<button type="button" id="botaoEnvia" class="btn-color" style="width: 50%;"
-						onclick="criaTabela();">GERAR TABELA</button>
+						onclick="createTable();">GERAR TABELA</button>
 				</form>
 
 				<div id="processo" class="col-md-12 centralize">
 					<label class="grey-text">Selecione um Algoritmo: </label><br>
-					<select onclick="selecionouAlgoritimo()" id="campoSubstituicao"
-						style="width:25%; display: inline;" class="form-control hvr-float-shadow ">
+					<select  id="campoSubstituicao" style="width:25%; display: inline;" class="form-control hvr-float-shadow ">
 						<option value="FIFO" selected="selected">FIFO</option>
 						<option value="LRU">LRU</option>
 						<option value="LFU">LFU</option>
