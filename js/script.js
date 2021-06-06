@@ -6,6 +6,7 @@ var arrayCountLRU = [];
 var arrayLFU = [];
 var arrayCountLFU = [];
 
+
 //Variaveis hit e miss
 var hit = 0;
 var miss = 0;
@@ -56,14 +57,14 @@ function selecionouAlgoritimo() {
 
 /* Função para criar a mensagem saida e entrada de bloco */
 function mostraValorQueSai(valorIni, valorFim) {
-	document.getElementById("valorQueSai").style.display = "block"; // Desabilitar
-	document.getElementById("valorQueEntra").style.display = "block"; // Desabilitar
 	var sai = document.getElementById("valorQueSai");
 	var entra = document.getElementById("valorQueEntra");
-	sai.innerHTML = "Bloco que sai: " + valorIni;
-	sai.style.color = "red";
-	entra.innerHTML = "Bloco que entra: " + valorFim;
-	entra.style.color = "green";
+
+	sai.style.display = "block";
+	entra.style.display = "block";
+
+	sai.innerHTML = '<b>Bloco que sai: </b>' + valorIni;
+	entra.innerHTML = '<b>Bloco que entra: </b>' + valorFim;
 }
 
 /* Função para retornar valor da memoria principal */
