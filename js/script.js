@@ -208,8 +208,7 @@ function algSubs() {
 			for (var i = (mod * valorDeN()); i < con; i++) {
 
 				var indiceArrayLFU = vetLFU.indexOf(vetGlobal[i]);
-				/* Se os acessos da posição deste indice for menor
-				   que o valor do indice auxiliar troca  		 */
+				//Se o valor no vetor da posição deste indice for menor que o valor do indice auxiliar os valores são trocados
 				if (vetCountLFU[indiceArrayLFU] < aux2) {
 					aux = indiceArrayLFU;
 					aux2 = vetCountLFU[indiceArrayLFU];
