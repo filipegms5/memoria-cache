@@ -257,85 +257,90 @@ function algSubs() {
 	var mod = getBloco() % buildConjunto();
 	var con = (mod * valorDeN()) + valorDeN();
 
-	if (alg == 'FIFO') {
-		for (var i = (mod * valorDeN()); i < con; i++) {
-			var indice = vetFila.indexOf(vetGlobal[i]);
-			if (indice < aux) { // Se indice é menor que o auxiliar troca valores e incrementa
-				aux = indice;
-				indexF = (mod * valorDeN()) + j++;
+	switch (alg) {
+		case 'FIFO':
+			for (var i = (mod * valorDeN()); i < con; i++) {
+				var indice = vetFila.indexOf(vetGlobal[i]);
+				if (indice < aux) { // Se indice é menor que o auxiliar troca valores e incrementa
+					aux = indice;
+					indexF = (mod * valorDeN()) + j++;
+				}
+				else if (indice > aux) {
+					j++;
+				}
 			}
-			else if (indice > aux) {
-				j++;
+			var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+	
+			showRemove(vetFila[aux], getBloco()); //Chama func que mostra a remoção
+	
+			//Splice no valor que está na fila, inserindo um novo valor no fim da fila:
+			vetFila.splice(aux, 1);
+			push(vetFila, getBloco());
+			vetGlobal[indexF] = getBloco();
+	
+			changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
+			break;
+		case 'LFU':
+			for (var i = (mod * valorDeN()); i < con; i++) {
+
+				var indiceArrayLFU = vetLFU.indexOf(vetGlobal[i]);
+				/* Se os acessos da posição deste indice for menor
+				   que o valor do indice auxiliar troca  		 */
+				if (vetCountLFU[indiceArrayLFU] < aux2) {
+					aux = indiceArrayLFU;
+					aux2 = vetCountLFU[indiceArrayLFU];
+					indexF = (mod * valorDeN()) + j++;
+				}
+				else if (vetCountLFU[indiceArrayLFU] >= aux2) {
+					j++;
+				}
 			}
-		}
-		var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+	
+			showRemove(vetLFU[aux], getBloco()); //Chama func que mostra a remoção
+			var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+	
+			//Remove 1 elemento dos vetores em que o indice é aux
+			vetLFU.splice(aux, 1);
+			vetCountLFU.splice(aux, 1);
+			//insere o bloco digitado em um vetor e o count no outro
+			push(vetLFU, getBloco());
+			push(vetCountLFU, 1);
+			vetGlobal[indexF] = getBloco();
+	
+			changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
+			break;
 
-		showRemove(vetFila[aux], getBloco()); //Chama func que mostra a remoção
-
-		//Splice no valor que está na fila, inserindo um novo valor no fim da fila:
-		vetFila.splice(aux, 1);
-		push(vetFila, getBloco());
-		vetGlobal[indexF] = getBloco();
-
-		changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
-	}
-	else if (alg == 'LFU') {
-		for (var i = (mod * valorDeN()); i < con; i++) {
-
-			var indiceArrayLFU = vetLFU.indexOf(vetGlobal[i]);
-			/* Se os acessos da posição deste indice for menor
-			   que o valor do indice auxiliar troca  		 */
-			if (vetCountLFU[indiceArrayLFU] < aux2) {
-				aux = indiceArrayLFU;
-				aux2 = vetCountLFU[indiceArrayLFU];
-				indexF = (mod * valorDeN()) + j++;
+		case 'LRU':
+			for (var i = (mod * valorDeN()); i < con; i++) {
+				var indiceArrayLRU = vetLRU.indexOf(vetGlobal[i]);
+				//Se o valor no vetor da posição deste indice for menor que o valor do indice auxiliar os valores são trocados
+				if (vetCountLRU[indiceArrayLRU] < aux2) {
+					aux = indiceArrayLRU;
+					aux2 = vetCountLRU[indiceArrayLRU];
+					indexF = (mod * valorDeN()) + j++;
+				}
+				else if (vetCountLRU[indiceArrayLRU] >= aux2) {
+					j++;
+				}
 			}
-			else if (vetCountLFU[indiceArrayLFU] >= aux2) {
-				j++;
-			}
-		}
+			showRemove(vetLRU[aux], getBloco()); //Chama func que mostra a remoção
+	
+			//Valor do final
+			var endValue = vetLRU.indexOf(vetGlobal[con - 1]);
+			push(vetCountLRU, vetCountLRU[endValue] + 1);
+	
+			var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+	
+			//Splice no valor que está na fila, inserindo um novo valor no fim da fila com maior valor +1 :
+			vetLRU.splice(aux, 1);
+			vetCountLRU.splice(aux, 1);
+			push(vetLRU, getBloco());
+			vetGlobal[indexF] = getBloco();
+	
+			changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
+			break;
 
-		showRemove(vetLFU[aux], getBloco()); //Chama func que mostra a remoção
-		var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
-
-		//Remove 1 elemento dos vetores em que o indice é aux
-		vetLFU.splice(aux, 1);
-		vetCountLFU.splice(aux, 1);
-		//insere o bloco digitado em um vetor e o count no outro
-		push(vetLFU, getBloco());
-		push(vetCountLFU, 1);
-		vetGlobal[indexF] = getBloco();
-
-		changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
-	}
-	else if (alg == 'LRU') {
-		for (var i = (mod * valorDeN()); i < con; i++) {
-			var indiceArrayLRU = vetLRU.indexOf(vetGlobal[i]);
-			/* Se os acessos da posição deste indice for menor
-			   que o valor do indice auxiliar troca  		 */
-			if (vetCountLRU[indiceArrayLRU] < aux2) {
-				aux = indiceArrayLRU;
-				aux2 = vetCountLRU[indiceArrayLRU];
-				indexF = (mod * valorDeN()) + j++;
-			}
-			else if (vetCountLRU[indiceArrayLRU] >= aux2) {
-				j++;
-			}
-		}
-		showRemove(vetLRU[aux], getBloco()); //Chama func que mostra a remoção
-
-		//Valor do final
-		var endValue = vetLRU.indexOf(vetGlobal[con - 1]);
-		push(vetCountLRU, vetCountLRU[endValue] + 1);
-
-		var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
-
-		//Splice no valor que está na fila, inserindo um novo valor no fim da fila com maior valor +1 :
-		vetLRU.splice(aux, 1);
-		vetCountLRU.splice(aux, 1);
-		push(vetLRU, getBloco());
-		vetGlobal[indexF] = getBloco();
-
-		changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
+		default:
+			break;
 	}
 }
