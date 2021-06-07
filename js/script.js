@@ -74,17 +74,19 @@ function getBloco() {
 	return parseInt(document.getElementById("tamBloco").value);
 }
 
+// Desabilita o campo de seleção de algoritmo
 function disableSelect() {
 	document.getElementById("selectAlg").setAttribute('disabled', 'disabled');
 }
 
-/* Calcula quantidade de conjunto */
+//Get qt Conjunto
 function buildConjunto() {
 	return Math.round(quantidadeDeLinha() / valorDeN()) == 0 ? 1 : Math.round(quantidadeDeLinha() / valorDeN());
 }
 
+// Adiciona um valor no fim do vetor
 function push(array, valor) {
-	array.push(valor); // Adiciona um valor no fim do vetor
+	array.push(valor); 
 }
 
 //Função de criação da tabela
@@ -167,85 +169,7 @@ function existe(bloco, op) {
 	return false;
 }
 
-// Função para carregamento de bloco
-function btnLoadBlock() {
-	var blocoIns = getBloco(); // Pega o bloco inserido
-
-	if (blocoIns >= 0) { // Se o bloco inserido for maior ou igual a 0 executa
-		disableSelect();// Desabilita o campo de seleção de algoritmo
-
-		// Cria a variavel com o local em que o bloco irá entrar e uma que armazena o mod do bloco inserido
-		var modBlock = blocoIns % buildConjunto();
-		var localMemCache = (modBlock * valorDeN());
-
-		exibeMod(blocoIns, modBlock); // Chama função que exibe o bloco que sai e entra
-
-		if (!existe(blocoIns, localMemCache)) { // Se o bloco não existe dentro do conjunto 
-			if (isEmpty(localMemCache) != -1) { // Se o conjunto não estiver cheio:
-
-				// Torna as mensagens de aviso invisiveis
-				document.getElementById("valorQueSai").style.display = "none";
-				document.getElementById("valorQueEntra").style.display = "none";
-
-				var locIndex = localMemCache + isEmpty(localMemCache);	// Atribui bloco inserido ao array de controle e declara variavel
-				vetGlobal[locIndex] = blocoIns;
-
-				// Insere o bloco inserido no final dos arrays
-				push(vetFila, blocoIns);
-				push(vetLFU, blocoIns);
-				push(vetCountLFU, 1);
-				push(vetLRU, blocoIns);
-
-				if (vetCountLRU.length == 0) { // Se o tamanho do array for igual a 0
-					push(vetCountLRU, 1);
-				}
-				else {
-					var last = vetCountLRU.length - 1; // recebe o ultimo indice do vetor
-					for (var i = 0; i < vetCountLRU.lenght; i++) { // for iterando por todo o vetor
-						if (vetCountLRU[i] > vetCountLRU[last]) {// Se o valor atual for maior q o ultimo
-							last = i;
-						}
-					}
-					push(vetCountLRU, vetCountLRU[last] + 1); // Insere no final do vetor o maior valor do array
-				}
-				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns; // Executa a troca de bloco
-			}
-			else {
-				algSubs(); // Caso o conjunto esteja cheio roda o algoritmo de substituição
-			}
-			// Incrementa o miss:
-			miss++;
-			hitOrMiss();
-		}
-		// Se o valor já foi inserido antes
-		else {
-			// Incremente o hit:
-			hit++;
-			hitOrMiss();
-
-			var indexLFU = vetLFU.indexOf(blocoIns); // Atualiza o valor no array de frequencia de acessos
-			vetCountLFU[indexLFU] += 1;
-
-			// Atualiza o valor no array de recentes:
-			var indexLRU = vetLRU.indexOf(blocoIns);
-			var finalVal = vetLRU.length - 1;
-			var incVal = vetCountLRU[finalVal];
-
-			// for colocando o maior valor no atual:
-			for (var i = 0; i < vetGlobal.lenght; i++) {
-				if (vetCountLRU[i] == incVal) {
-					incVal += 1;
-				}
-			}
-			vetCountLRU[indexLRU] = incVal + 1;
-		}
-	}
-	else {
-		alert("Tem que ter uma valor né querido!"); // Se o valor inserido for invalido
-	}
-}
-
-//Dispara o algoritimo de substituição selecionado
+//Dispara o algoritmo de substituição selecionado
 function algSubs() {
 	var aux = Number.MAX_VALUE;
 	var aux2 = Number.MAX_VALUE;
@@ -342,5 +266,83 @@ function algSubs() {
 
 		default:
 			break;
+	}
+}
+
+// Função para carregamento de bloco
+function btnLoadBlock() {
+	var blocoIns = getBloco(); // Pega o bloco inserido
+
+	if (blocoIns >= 0) { // Se o bloco inserido for maior ou igual a 0 executa
+		disableSelect();// Desabilita o campo de seleção de algoritmo
+
+		// Cria a variavel com o local em que o bloco irá entrar e uma que armazena o mod do bloco inserido
+		var modBlock = blocoIns % buildConjunto();
+		var localMemCache = (modBlock * valorDeN());
+
+		exibeMod(blocoIns, modBlock); // Chama função que exibe o bloco que sai e entra
+
+		if (!existe(blocoIns, localMemCache)) { // Se o bloco não existe dentro do conjunto 
+			if (isEmpty(localMemCache) != -1) { // Se o conjunto não estiver cheio:
+
+				// Torna as mensagens de aviso invisiveis
+				document.getElementById("valorQueSai").style.display = "none";
+				document.getElementById("valorQueEntra").style.display = "none";
+
+				var locIndex = localMemCache + isEmpty(localMemCache);	// Atribui bloco inserido ao array de controle e declara variavel
+				vetGlobal[locIndex] = blocoIns;
+
+				// Insere o bloco inserido no final dos arrays
+				push(vetFila, blocoIns);
+				push(vetLFU, blocoIns);
+				push(vetCountLFU, 1);
+				push(vetLRU, blocoIns);
+
+				if (vetCountLRU.length == 0) { // Se o tamanho do array for igual a 0
+					push(vetCountLRU, 1);
+				}
+				else {
+					var last = vetCountLRU.length - 1; // recebe o ultimo indice do vetor
+					for (var i = 0; i < vetCountLRU.lenght; i++) { // for iterando por todo o vetor
+						if (vetCountLRU[i] > vetCountLRU[last]) {// Se o valor atual for maior q o ultimo
+							last = i;
+						}
+					}
+					push(vetCountLRU, vetCountLRU[last] + 1); // Insere no final do vetor o maior valor do array
+				}
+				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns; // Executa a troca de bloco
+			}
+			else {
+				algSubs(); // Caso o conjunto esteja cheio roda o algoritmo de substituição
+			}
+			// Incrementa o miss:
+			miss++;
+			hitOrMiss();
+		}
+		// Se o valor já foi inserido antes
+		else {
+			// Incremente o hit:
+			hit++;
+			hitOrMiss();
+
+			var indexLFU = vetLFU.indexOf(blocoIns); // Atualiza o valor no array de frequencia de acessos
+			vetCountLFU[indexLFU] += 1;
+
+			// Atualiza o valor no array de recentes:
+			var indexLRU = vetLRU.indexOf(blocoIns);
+			var finalVal = vetLRU.length - 1;
+			var incVal = vetCountLRU[finalVal];
+
+			// for colocando o maior valor no atual:
+			for (var i = 0; i < vetGlobal.lenght; i++) {
+				if (vetCountLRU[i] == incVal) {
+					incVal += 1;
+				}
+			}
+			vetCountLRU[indexLRU] = incVal + 1;
+		}
+	}
+	else {
+		alert("Tem que ter uma valor né querido!"); // Se o valor inserido for invalido
 	}
 }
