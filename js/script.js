@@ -1,12 +1,11 @@
 //Arrays  do projeto
-//TODO: MUDAR NOME DAS VARIÁVEIS, FUNÇÕES E COMENTÁRIOS
 
-var arrGlobal = []; // arrGlobal
-var arrFila = []; // arrFila
-var arrLRU = []; // arrLRU
-var arrCountLRU = []; // arrCountLRU
-var arrLFU = []; // arrLFU
-var arrCountLFU = []; // arrCountLFU
+var vetGlobal = []; // vetor Global
+var vetFila = []; // vetor Fila
+var vetLRU = []; // vetor LRU
+var vetCountLRU = []; // vetor CountLRU
+var vetLFU = []; // vetor LFU
+var vetCountLFU = []; // vetor CountLFU
 
 
 //Variaveis hit e miss
@@ -153,7 +152,7 @@ function createTable() {
 // Checa se o conjunto está vazio 
 function isEmpty(op) {
 	for (var i = 0; i < valorDeN(); i++) {
-		if (arrGlobal[op] == null)
+		if (vetGlobal[op] == null)
 			return i;
 		op++;
 	}
@@ -164,7 +163,7 @@ function isEmpty(op) {
 // Checa se o valor existe
 function existe(bloco, op) {
 	for (var i = op; i < (op + valorDeN()); i++)
-		if (arrGlobal[i] == bloco)
+		if (vetGlobal[i] == bloco)
 			return true;
 	return false;
 }
@@ -190,25 +189,25 @@ function btnLoadBlock() {
 				document.getElementById("valorQueEntra").style.display = "none";
 
 				var locIndex = localMemCache + isEmpty(localMemCache);	// Atribui bloco inserido ao array de controle e declara variavel
-				arrGlobal[locIndex] = blocoIns;
+				vetGlobal[locIndex] = blocoIns;
 
 				// Insere o bloco inserido no final dos arrays
-				push(arrFila, blocoIns);
-				push(arrLFU, blocoIns);
-				push(arrCountLFU, 1);
-				push(arrLRU, blocoIns);
+				push(vetFila, blocoIns);
+				push(vetLFU, blocoIns);
+				push(vetCountLFU, 1);
+				push(vetLRU, blocoIns);
 
-				if (arrCountLRU.length == 0) { // Se o tamanho do array for igual a 0
-					push(arrCountLRU, 1);
+				if (vetCountLRU.length == 0) { // Se o tamanho do array for igual a 0
+					push(vetCountLRU, 1);
 				}
 				else {
-					var last = arrCountLRU.length - 1; // recebe o ultimo indice do vetor
-					for (var i = 0; i < arrCountLRU.lenght; i++) { // for iterando por todo o vetor
-						if (arrCountLRU[i] > arrCountLRU[last]) {// Se o valor atual for maior q o ultimo
+					var last = vetCountLRU.length - 1; // recebe o ultimo indice do vetor
+					for (var i = 0; i < vetCountLRU.lenght; i++) { // for iterando por todo o vetor
+						if (vetCountLRU[i] > vetCountLRU[last]) {// Se o valor atual for maior q o ultimo
 							last = i;
 						}
 					}
-					push(arrCountLRU, arrCountLRU[last] + 1); // Insere no final do vetor o maior valor do array
+					push(vetCountLRU, vetCountLRU[last] + 1); // Insere no final do vetor o maior valor do array
 				}
 				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns; // Executa a troca de bloco
 			}
@@ -225,21 +224,21 @@ function btnLoadBlock() {
 			hit++;
 			hitOrMiss();
 
-			var indexLFU = arrLFU.indexOf(blocoIns); // Atualiza o valor no array de frequencia de acessos
-			arrCountLFU[indexLFU] += 1;
+			var indexLFU = vetLFU.indexOf(blocoIns); // Atualiza o valor no array de frequencia de acessos
+			vetCountLFU[indexLFU] += 1;
 
 			// Atualiza o valor no array de recentes:
-			var indexLRU = arrLRU.indexOf(blocoIns);
-			var finalVal = arrLRU.length - 1;
-			var incVal = arrCountLRU[finalVal];
+			var indexLRU = vetLRU.indexOf(blocoIns);
+			var finalVal = vetLRU.length - 1;
+			var incVal = vetCountLRU[finalVal];
 
 			// for colocando o maior valor no atual:
-			for (var i = 0; i < arrGlobal.lenght; i++) {
-				if (arrCountLRU[i] == incVal) {
+			for (var i = 0; i < vetGlobal.lenght; i++) {
+				if (vetCountLRU[i] == incVal) {
 					incVal += 1;
 				}
 			}
-			arrCountLRU[indexLRU] = incVal + 1;
+			vetCountLRU[indexLRU] = incVal + 1;
 		}
 	}
 	else {
@@ -266,7 +265,7 @@ function algoritmoSubstituicao() {
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
 			/* Pega o indice de cada linha */
-			var indice = arrFila.indexOf(arrGlobal[i]);
+			var indice = vetFila.indexOf(vetGlobal[i]);
 			/* Se ele for menor que o indice auxiliar troca valores */
 			if (indice < aux) {
 				aux = indice;
@@ -280,11 +279,11 @@ function algoritmoSubstituicao() {
 		/* Cria variavel para trocar bloco */
 		var trocaBloco = document.getElementById("array" + indiceFim);
 		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(arrFila[aux], blocoDigitado);
+		mostraValorQueSai(vetFila[aux], blocoDigitado);
 		/* Remove o elementro da fila e insere o novo no final */
-		arrFila.splice(aux, 1);
-		push(arrFila, blocoDigitado);
-		arrGlobal[indiceFim] = blocoDigitado;
+		vetFila.splice(aux, 1);
+		push(vetFila, blocoDigitado);
+		vetGlobal[indiceFim] = blocoDigitado;
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
@@ -294,30 +293,30 @@ function algoritmoSubstituicao() {
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
 			/* Pega o indice de cada linha */
-			var indiceArrayLFU = arrLFU.indexOf(arrGlobal[i]);
+			var indiceArrayLFU = vetLFU.indexOf(vetGlobal[i]);
 			/* Se os acessos da posição deste indice for menor
 			   que o valor do indice auxiliar troca  		 */
-			if (arrCountLFU[indiceArrayLFU] < valorAux) {
+			if (vetCountLFU[indiceArrayLFU] < valorAux) {
 				aux = indiceArrayLFU;
-				valorAux = arrCountLFU[indiceArrayLFU];
+				valorAux = vetCountLFU[indiceArrayLFU];
 				indiceFim = localMemoriaCache + j++;
 			}
 			/* Se não incrementa o J */
-			else if (arrCountLFU[indiceArrayLFU] >= valorAux) {
+			else if (vetCountLFU[indiceArrayLFU] >= valorAux) {
 				j++;
 			}
 
 		}
 		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(arrLFU[aux], blocoDigitado);
+		mostraValorQueSai(vetLFU[aux], blocoDigitado);
 		/* Cria variavel para trocar bloco */
 		var trocaBloco = document.getElementById("array" + indiceFim);
 		/* Remove o elemento e insere o outro no final do array com acesso = 1 */
-		arrLFU.splice(aux, 1);
-		arrCountLFU.splice(aux, 1);
-		push(arrLFU, blocoDigitado);
-		push(arrCountLFU, 1);
-		arrGlobal[indiceFim] = blocoDigitado;
+		vetLFU.splice(aux, 1);
+		vetCountLFU.splice(aux, 1);
+		push(vetLFU, blocoDigitado);
+		push(vetCountLFU, 1);
+		vetGlobal[indiceFim] = blocoDigitado;
 		/* Troca bloco e adiciona animações */
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
@@ -327,32 +326,32 @@ function algoritmoSubstituicao() {
 		   ate a ultima linha do conjunto 					*/
 		for (var i = localMemoriaCache; i < condicao; i++) {
 			/* Pega o indice de cada linha */
-			var indiceArrayLRU = arrLRU.indexOf(arrGlobal[i]);
+			var indiceArrayLRU = vetLRU.indexOf(vetGlobal[i]);
 			/* Se os acessos da posição deste indice for menor
 			   que o valor do indice auxiliar troca  		 */
-			if (arrCountLRU[indiceArrayLRU] < valorAux) {
+			if (vetCountLRU[indiceArrayLRU] < valorAux) {
 				aux = indiceArrayLRU;
-				valorAux = arrCountLRU[indiceArrayLRU];
+				valorAux = vetCountLRU[indiceArrayLRU];
 				indiceFim = localMemoriaCache + j++;
 			}
 			/* Se não incrementa o J */
-			else if (arrCountLRU[indiceArrayLRU] >= valorAux) {
+			else if (vetCountLRU[indiceArrayLRU] >= valorAux) {
 				j++;
 			}
 		}
 		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(arrLRU[aux], blocoDigitado);
+		mostraValorQueSai(vetLRU[aux], blocoDigitado);
 		/* Pega o valor final do conjunto */
-		var valorFinal = arrLRU.indexOf(arrGlobal[condicao - 1]);
-		push(arrCountLRU, arrCountLRU[valorFinal] + 1);
+		var valorFinal = vetLRU.indexOf(vetGlobal[condicao - 1]);
+		push(vetCountLRU, vetCountLRU[valorFinal] + 1);
 		/* Cria variavel para trocar bloco */
 		var trocaBloco = document.getElementById("array" + indiceFim);
 		/* Remove o elemento e insere o outro no final do array com o maior valor +1 */
-		arrLRU.splice(aux, 1);
-		arrCountLRU.splice(aux, 1);
-		push(arrLRU, blocoDigitado);
+		vetLRU.splice(aux, 1);
+		vetCountLRU.splice(aux, 1);
+		push(vetLRU, blocoDigitado);
 		/* Troca bloco e adiciona animações */
-		arrGlobal[indiceFim] = blocoDigitado;
+		vetGlobal[indiceFim] = blocoDigitado;
 		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
 	}
 }
