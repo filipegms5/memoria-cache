@@ -1,5 +1,8 @@
-//Arrays  do projeto
+//Variaveis hit e miss
+var hit = 0;
+var miss = 0;
 
+//Arrays  do projeto
 var vetGlobal = []; // vetor Global
 var vetFila = []; // vetor Fila
 var vetLRU = []; // vetor LRU
@@ -7,12 +10,7 @@ var vetCountLRU = []; // vetor CountLRU
 var vetLFU = []; // vetor LFU
 var vetCountLFU = []; // vetor CountLFU
 
-
-//Variaveis hit e miss
-var hit = 0;
-var miss = 0;
-
-//Função (ou funções) ao carregar a página
+//Função ao carregar a página
 window.onload = function () {
 	document.getElementById('processo').style.display = 'none';
 };
@@ -36,11 +34,11 @@ function hitOrMiss() {
 
 //Msg de MOD
 function exibeMod(bloco, mod) {
-	document.getElementById("ModTotal").innerHTML = bloco + " % " + montaConjuntos() + " = " + mod;
+	document.getElementById("ModTotal").innerHTML = bloco + " % " + buildConjunto() + " = " + mod;
 }
 
 // Criação dos valores de entrada e saída para display ao usuário 
-function mostraValorQueSai(valorIni, valorFim) {
+function showRemove(valorIni, valorFim) {
 	var s = document.getElementById("valorQueSai");
 	var e = document.getElementById("valorQueEntra");
 
@@ -51,36 +49,37 @@ function mostraValorQueSai(valorIni, valorFim) {
 	e.innerHTML = '<b>Bloco que entra: </b>' + valorFim;
 }
 
-/* Função para parse e retornar valor da memoria principal */
+//Get valor da memoria principal indicada pelo usuario
 function memoriaPrincipal() {
 	return parseInt(document.getElementById("tamanhoMemoria").value);
 }
 
-/* Função para parse e retornar valor do tamanho do bloco */
+//Get valor do tamanho Do Bloco indicado pelo usuario
 function tamanhoDoBloco() {
 	return parseInt(document.getElementById("tamanhoBloco").value);
 }
 
-/* Função para parse e retornar valor da quantidade de linha */
+//Get valor da quantidade De Linha indicada pelo usuario
 function quantidadeDeLinha() {
 	return parseInt(document.getElementById("quantidadeLinha").value);
 }
 
-/* Função para dar parse e retornar valor de N */
+//Get valor De N indicado pelo usuario
 function valorDeN() {
 	return parseInt(document.getElementById("valorDeN").value);
 }
 
+//Get valor do bloco indicado pelo usuario
 function getBloco() {
-	return parseInt(document.getElementById("carregarBloco").value);
+	return parseInt(document.getElementById("tamBloco").value);
 }
 
 function disableSelect() {
-	document.getElementById("campoSubstituicao").setAttribute('disabled', 'disabled');
+	document.getElementById("selectAlg").setAttribute('disabled', 'disabled');
 }
 
 /* Calcula quantidade de conjunto */
-function montaConjuntos() {
+function buildConjunto() {
 	return Math.round(quantidadeDeLinha() / valorDeN()) == 0 ? 1 : Math.round(quantidadeDeLinha() / valorDeN());
 }
 
@@ -176,7 +175,7 @@ function btnLoadBlock() {
 		disableSelect();// Desabilita o campo de seleção de algoritmo
 
 		// Cria a variavel com o local em que o bloco irá entrar e uma que armazena o mod do bloco inserido
-		var modBlock = blocoIns % montaConjuntos();
+		var modBlock = blocoIns % buildConjunto();
 		var localMemCache = (modBlock * valorDeN());
 
 		exibeMod(blocoIns, modBlock); // Chama função que exibe o bloco que sai e entra
@@ -212,7 +211,7 @@ function btnLoadBlock() {
 				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns; // Executa a troca de bloco
 			}
 			else {
-				algoritmoSubstituicao(); // Caso o conjunto esteja cheio roda o algoritmo de substituição
+				algSubs(); // Caso o conjunto esteja cheio roda o algoritmo de substituição
 			}
 			// Incrementa o miss:
 			miss++;
@@ -246,112 +245,97 @@ function btnLoadBlock() {
 	}
 }
 
-/* Executa o algoritmo de substituição */
-function algoritmoSubstituicao() {
-	/* Cria variaveis para troca de blocos */
-	var algoritmo = document.getElementById("campoSubstituicao").value;
-	var blocoDigitado = parseInt(document.getElementById("carregarBloco").value);
-	var mod = blocoDigitado % montaConjuntos();
-	var localMemoriaCache = (mod * valorDeN());
+//Dispara o algoritimo de substituição selecionado
+function algSubs() {
 	var aux = Number.MAX_VALUE;
-	var valorAux = Number.MAX_VALUE;
-	var indiceFim = 0;
-	var j = 0;
-	var condicao = localMemoriaCache + valorDeN();
+	var aux2 = Number.MAX_VALUE;
 
-	/* Se o algoritmo for FIFO executa */
-	if (algoritmo == 'FIFO') {
-		/* Começa na linha do primeiro bloco do conjunto e vai
-		   ate a ultima linha do conjunto 					*/
-		for (var i = localMemoriaCache; i < condicao; i++) {
-			/* Pega o indice de cada linha */
+	var indexF = 0;
+	var j = 0;
+
+	var alg = document.getElementById("selectAlg").value;
+	var mod = getBloco() % buildConjunto();
+	var con = (mod * valorDeN()) + valorDeN();
+
+	if (alg == 'FIFO') {
+		for (var i = (mod * valorDeN()); i < con; i++) {
 			var indice = vetFila.indexOf(vetGlobal[i]);
-			/* Se ele for menor que o indice auxiliar troca valores */
-			if (indice < aux) {
+			if (indice < aux) { // Se indice é menor que o auxiliar troca valores e incrementa
 				aux = indice;
-				indiceFim = localMemoriaCache + j++;
+				indexF = (mod * valorDeN()) + j++;
 			}
-			/* Se não incrementa o J */
 			else if (indice > aux) {
 				j++;
 			}
 		}
-		/* Cria variavel para trocar bloco */
-		var trocaBloco = document.getElementById("array" + indiceFim);
-		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(vetFila[aux], blocoDigitado);
-		/* Remove o elementro da fila e insere o novo no final */
+		var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+
+		showRemove(vetFila[aux], getBloco()); //Chama func que mostra a remoção
+
+		//Splice no valor que está na fila, inserindo um novo valor no fim da fila:
 		vetFila.splice(aux, 1);
-		push(vetFila, blocoDigitado);
-		vetGlobal[indiceFim] = blocoDigitado;
-		/* Troca bloco e adiciona animações */
-		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
+		push(vetFila, getBloco());
+		vetGlobal[indexF] = getBloco();
+
+		changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
 	}
-	/* Se o algoritmo for LFU executa */
-	else if (algoritmo == 'LFU') {
-		/* Começa na linha do primeiro bloco do conjunto e vai
-		   ate a ultima linha do conjunto 					*/
-		for (var i = localMemoriaCache; i < condicao; i++) {
-			/* Pega o indice de cada linha */
+	else if (alg == 'LFU') {
+		for (var i = (mod * valorDeN()); i < con; i++) {
+
 			var indiceArrayLFU = vetLFU.indexOf(vetGlobal[i]);
 			/* Se os acessos da posição deste indice for menor
 			   que o valor do indice auxiliar troca  		 */
-			if (vetCountLFU[indiceArrayLFU] < valorAux) {
+			if (vetCountLFU[indiceArrayLFU] < aux2) {
 				aux = indiceArrayLFU;
-				valorAux = vetCountLFU[indiceArrayLFU];
-				indiceFim = localMemoriaCache + j++;
+				aux2 = vetCountLFU[indiceArrayLFU];
+				indexF = (mod * valorDeN()) + j++;
 			}
-			/* Se não incrementa o J */
-			else if (vetCountLFU[indiceArrayLFU] >= valorAux) {
+			else if (vetCountLFU[indiceArrayLFU] >= aux2) {
 				j++;
 			}
-
 		}
-		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(vetLFU[aux], blocoDigitado);
-		/* Cria variavel para trocar bloco */
-		var trocaBloco = document.getElementById("array" + indiceFim);
-		/* Remove o elemento e insere o outro no final do array com acesso = 1 */
+
+		showRemove(vetLFU[aux], getBloco()); //Chama func que mostra a remoção
+		var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+
+		//Remove 1 elemento dos vetores em que o indice é aux
 		vetLFU.splice(aux, 1);
 		vetCountLFU.splice(aux, 1);
-		push(vetLFU, blocoDigitado);
+		//insere o bloco digitado em um vetor e o count no outro
+		push(vetLFU, getBloco());
 		push(vetCountLFU, 1);
-		vetGlobal[indiceFim] = blocoDigitado;
-		/* Troca bloco e adiciona animações */
-		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
+		vetGlobal[indexF] = getBloco();
+
+		changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
 	}
-	/* Se o algoritmo selecionado for o LRU executa */
-	else if (algoritmo == 'LRU') {
-		/* Começa na linha do primeiro bloco do conjunto e vai
-		   ate a ultima linha do conjunto 					*/
-		for (var i = localMemoriaCache; i < condicao; i++) {
-			/* Pega o indice de cada linha */
+	else if (alg == 'LRU') {
+		for (var i = (mod * valorDeN()); i < con; i++) {
 			var indiceArrayLRU = vetLRU.indexOf(vetGlobal[i]);
 			/* Se os acessos da posição deste indice for menor
 			   que o valor do indice auxiliar troca  		 */
-			if (vetCountLRU[indiceArrayLRU] < valorAux) {
+			if (vetCountLRU[indiceArrayLRU] < aux2) {
 				aux = indiceArrayLRU;
-				valorAux = vetCountLRU[indiceArrayLRU];
-				indiceFim = localMemoriaCache + j++;
+				aux2 = vetCountLRU[indiceArrayLRU];
+				indexF = (mod * valorDeN()) + j++;
 			}
-			/* Se não incrementa o J */
-			else if (vetCountLRU[indiceArrayLRU] >= valorAux) {
+			else if (vetCountLRU[indiceArrayLRU] >= aux2) {
 				j++;
 			}
 		}
-		/* Exibe na tela o valor que sai e o que entra */
-		mostraValorQueSai(vetLRU[aux], blocoDigitado);
-		/* Pega o valor final do conjunto */
-		var valorFinal = vetLRU.indexOf(vetGlobal[condicao - 1]);
-		push(vetCountLRU, vetCountLRU[valorFinal] + 1);
-		/* Cria variavel para trocar bloco */
-		var trocaBloco = document.getElementById("array" + indiceFim);
-		/* Remove o elemento e insere o outro no final do array com o maior valor +1 */
+		showRemove(vetLRU[aux], getBloco()); //Chama func que mostra a remoção
+
+		//Valor do final
+		var endValue = vetLRU.indexOf(vetGlobal[con - 1]);
+		push(vetCountLRU, vetCountLRU[endValue] + 1);
+
+		var changeBlock = document.getElementById("array" + indexF); // Gera uma var para conseguir mudar o bloco
+
+		//Splice no valor que está na fila, inserindo um novo valor no fim da fila com maior valor +1 :
 		vetLRU.splice(aux, 1);
 		vetCountLRU.splice(aux, 1);
-		push(vetLRU, blocoDigitado);
-		/* Troca bloco e adiciona animações */
-		vetGlobal[indiceFim] = blocoDigitado;
-		trocaBloco.innerHTML = "Bloco " + blocoDigitado;
+		push(vetLRU, getBloco());
+		vetGlobal[indexF] = getBloco();
+
+		changeBlock.innerHTML = "Bloco " + getBloco(); //Muda o bloco
 	}
 }

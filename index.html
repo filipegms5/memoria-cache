@@ -69,13 +69,13 @@
 
 				<div id="processo" class="col-md-12 centralize">
 					<label class="grey-text">Selecione um Algoritmo: </label><br>
-					<select  id="campoSubstituicao" style="width:25%; display: inline;" class="form-control hvr-float-shadow ">
+					<select id="selectAlg" style="width:25%; display: inline;" class="form-control hvr-float-shadow ">
 						<option value="FIFO" selected="selected">FIFO</option>
 						<option value="LRU">LRU</option>
 						<option value="LFU">LFU</option>
 					</select><br><br>
 					<label class="grey-text">Carregar bloco: </label>
-					<input class="form-control" id="carregarBloco" style="width: 25%;"><br><br>
+					<input class="form-control" id="tamBloco" style="width: 25%;"><br><br>
 
 					<div id="carregamento">
 						<div class="hit grey-text" id="Hit"></div>
@@ -94,8 +94,8 @@
 
 					<div>
 						<input id="botaoCarrega" type="button"
-							class="btn btn-color btn-loading hvr-float-shadow col-md-3"
-							value="Reiniciar Processo" onclick="location.reload();">
+							class="btn btn-color btn-loading hvr-float-shadow col-md-3" value="Reiniciar Processo"
+							onclick="location.reload();">
 					</div>
 
 					<br><br><br><br>
@@ -176,4 +176,5 @@
 		</div>
 	</section>
 </body>
+
 </html>
