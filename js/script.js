@@ -72,11 +72,11 @@ function valorDeN() {
 	return parseInt(document.getElementById("valorDeN").value);
 }
 
-function getBloco(){
+function getBloco() {
 	return parseInt(document.getElementById("carregarBloco").value);
 }
 
-function disableSelect(){
+function disableSelect() {
 	document.getElementById("campoSubstituicao").setAttribute('disabled', 'disabled');
 }
 
@@ -122,12 +122,10 @@ function createTable() {
 				trRow.appendChild(tdData).colSpan = 2;
 				tbody.appendChild(trRow);
 			}
-
-			/* Linha para as colunas - Excessão do nome do conjunto */
 			var tr = document.createElement("tr");
 
 			//Colunas
-			for (var col = 0; col < 3; col++) { 
+			for (var col = 0; col < 3; col++) {
 				var td = document.createElement("td");
 
 				//blocos
@@ -155,7 +153,7 @@ function createTable() {
 // Checa se o conjunto está vazio 
 function isEmpty(op) {
 	for (var i = 0; i < valorDeN(); i++) {
-		if (arrGlobal[op] == null) 
+		if (arrGlobal[op] == null)
 			return i;
 		op++;
 	}
@@ -165,81 +163,77 @@ function isEmpty(op) {
 
 // Checa se o valor existe
 function existe(bloco, op) {
-	for (var i = op; i < (op + valorDeN()); i++) 
-		if (arrGlobal[i] == bloco) 
+	for (var i = op; i < (op + valorDeN()); i++)
+		if (arrGlobal[i] == bloco)
 			return true;
 	return false;
 }
 
 // Função para carregamento de bloco
 function btnLoadBlock() {
-	// Pega o bloco inserido
-	var blocoIns = getBloco();
-	// Se o bloco inserido for maior ou igual a 0 executa
-	if (blocoIns >= 0) {
-		// Desabilita o campo de seleção de algoritmo
-		disableSelect();
+	var blocoIns = getBloco(); // Pega o bloco inserido
+
+	if (blocoIns >= 0) { // Se o bloco inserido for maior ou igual a 0 executa
+		disableSelect();// Desabilita o campo de seleção de algoritmo
+
 		// Cria a variavel com o local em que o bloco irá entrar e uma que armazena o mod do bloco inserido
 		var modBlock = blocoIns % montaConjuntos();
 		var localMemCache = (modBlock * valorDeN());
-		// Chama função que exibe o bloco que sai e entra
-		exibeMod(blocoIns, modBlock);
-		// Se o bloco não existe dentro do conjunto
-		if (!existe(blocoIns, localMemCache)) {
-			// Se o conjunto não estiver cheio 
-			if (isEmpty(localMemCache) != -1) {
+
+		exibeMod(blocoIns, modBlock); // Chama função que exibe o bloco que sai e entra
+
+		if (!existe(blocoIns, localMemCache)) { // Se o bloco não existe dentro do conjunto 
+			if (isEmpty(localMemCache) != -1) { // Se o conjunto não estiver cheio:
+
 				// Torna as mensagens de aviso invisiveis
-				document.getElementById("valorQueSai").style.display = "none"; 
+				document.getElementById("valorQueSai").style.display = "none";
 				document.getElementById("valorQueEntra").style.display = "none";
-				// Atribui bloco inserido ao array de controle e declara variavel
-				var locIndex = localMemCache + isEmpty(localMemCache)
+
+				var locIndex = localMemCache + isEmpty(localMemCache);	// Atribui bloco inserido ao array de controle e declara variavel
 				arrGlobal[locIndex] = blocoIns;
+
 				// Insere o bloco inserido no final dos arrays
 				push(arrFila, blocoIns);
 				push(arrLFU, blocoIns);
 				push(arrCountLFU, 1);
 				push(arrLRU, blocoIns);
-				// Se o tamanho do array for igual a 0
-				if (arrCountLRU.length == 0) {
+
+				if (arrCountLRU.length == 0) { // Se o tamanho do array for igual a 0
 					push(arrCountLRU, 1);
 				}
 				else {
-					// recebe o ultimo indice do vetor
-					var last = arrCountLRU.length - 1;
-					// for iterando por todo o vetor
-					for (var i = 0; i < arrCountLRU.lenght; i++) {
-						// Se o valor atual for maior q o ultimo
-						if (arrCountLRU[i] > arrCountLRU[last]) {
+					var last = arrCountLRU.length - 1; // recebe o ultimo indice do vetor
+					for (var i = 0; i < arrCountLRU.lenght; i++) { // for iterando por todo o vetor
+						if (arrCountLRU[i] > arrCountLRU[last]) {// Se o valor atual for maior q o ultimo
 							last = i;
 						}
 					}
-					// Insere no final do vetor o maior valor do array
-					push(arrCountLRU, arrCountLRU[last] + 1);
+					push(arrCountLRU, arrCountLRU[last] + 1); // Insere no final do vetor o maior valor do array
 				}
-				// Executa a troca de bloco
-				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns;
+				document.getElementById("array" + locIndex).innerHTML = "Bloco " + blocoIns; // Executa a troca de bloco
 			}
-			// Caso o conjunto esteja cheio roda o algoritmo de substituição
 			else {
-				algoritmoSubstituicao();
+				algoritmoSubstituicao(); // Caso o conjunto esteja cheio roda o algoritmo de substituição
 			}
-			// Incrementa o miss
+			// Incrementa o miss:
 			miss++;
 			hitOrMiss();
 		}
 		// Se o valor já foi inserido antes
 		else {
-			// Incremente o hit
+			// Incremente o hit:
 			hit++;
 			hitOrMiss();
-			// Atualiza o valor no array de frequencia de acessos
-			var indexLFU = arrLFU.indexOf(blocoIns);
+
+			var indexLFU = arrLFU.indexOf(blocoIns); // Atualiza o valor no array de frequencia de acessos
 			arrCountLFU[indexLFU] += 1;
-			// Atualiza o valor no array de recentes
+
+			// Atualiza o valor no array de recentes:
 			var indexLRU = arrLRU.indexOf(blocoIns);
 			var finalVal = arrLRU.length - 1;
 			var incVal = arrCountLRU[finalVal];
-			// for colocando o maior valor no atual 
+
+			// for colocando o maior valor no atual:
 			for (var i = 0; i < arrGlobal.lenght; i++) {
 				if (arrCountLRU[i] == incVal) {
 					incVal += 1;
@@ -248,9 +242,8 @@ function btnLoadBlock() {
 			arrCountLRU[indexLRU] = incVal + 1;
 		}
 	}
-	// Se o valor inserido for invalido
 	else {
-		alert("Tem que ter uma valor né querido!");
+		alert("Tem que ter uma valor né querido!"); // Se o valor inserido for invalido
 	}
 }
 
